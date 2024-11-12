@@ -1,30 +1,29 @@
-#ifndef LIVRE_H
-#define LIVRE_H
+#ifndef CD_H
+#define CD_H
 
 #include <Mediatheque.h>
 
 
-class Livre : public Mediatheque
+class CD : public Mediatheque
 {
     public:
-        Livre();
+        CD();
         # Constructeur hérite du constructeur de base de la classe médiathèque avec titre et ID et
         # ajoute les attributs spécifique à la classe interprète et label
-        Livre(const Livre& other, const string& auteur, const string& editeur, int ID) :
-          Mediatheque(Titre, ID), auteur(auteur), editeur(editeur);
+        CD(const CD& other, const string& interprete, const string& label, int ID) :
+          Mediatheque(Titre, ID), interprete(interprete), label(label);
         void ajouter();
         void supprimer();
         void rechercher();
         void afficher();
 
     protected:
-        string auteur;
-        string editeur;
+        string interprete;
+        string label;
         string donnees;
 
     private:
-        const string nomfichier = livre.txt
-
+        const string nomfichier = cd.txt
 };
 
-#endif // LIVRE_H
+#endif // CD_H
