@@ -1,22 +1,44 @@
 #include "Mediatheque.h"
+#include <string>
 
 Mediatheque::Mediatheque()
 {
-    //ctor
 }
-virtual Mediatheque::~Mediatheque()
+Mediatheque::~Mediatheque()
 {
-    //dtor
 }
-virtual void Mediatheque::afficher()
+void Mediatheque::afficher(string &Chemin)
 {
+    ifstream fichier(Chemin);
+    string ligne;
+    if (fichier)
+    {
+        while (getline(fichier, ligne))
+        {
+            cout << ligne << endl;
+        }
+    }
+    else
+    {
+        cerr << "Erreur d'ouverture du fichier : " << Chemin << std::endl;
+    }
+}
+void Mediatheque::rechercher()
+{
+}
+void Mediatheque::supprimer()
+{
+}
 
-}
-virtual void Mediatheque::rechercher()
+void Mediatheque::ecriturefichier(string &Chemin, string &Donnees)
 {
-
-}
-virtual Mediatheque::supprimer()
-{
-
+    ofstream fichier(Chemin, std::ios::app);
+    if (fichier)
+    {
+        fichier << Donnees << endl;
+    }
+    else
+    {
+        cerr << "Erreur d'ouverture du fichier : " << Chemin << std::endl;
+    }
 }
