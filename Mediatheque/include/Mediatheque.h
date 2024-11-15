@@ -17,15 +17,15 @@ class Mediatheque
 
         //Methode commune aux trois classe fille
         virtual ~Mediatheque();
-        virtual void afficher(string& Chemin);
-        virtual void rechercher();
-        virtual void supprimer();
-        virtual void ecriturefichier(string& Chemin, string& Donnees);
+        virtual void afficher(string& chemin);
+        virtual void rechercher(string& chemin,string& recherche);
+        virtual void supprimer(string &chemin,string& basechemin, int& ID);
+        virtual void ecriturefichier(string& chemin, string& donnees);
 
     protected:
         //Attribut communs aux trois classes filles
-        string Titre;
-        int ID;
+        string titre;
+        int id;
 
 };
 
