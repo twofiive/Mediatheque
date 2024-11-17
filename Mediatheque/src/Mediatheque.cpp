@@ -2,11 +2,11 @@
 #include <string>
 #include <iostream>
 #include <fstream>
-
-Mediatheque::Mediatheque() {}
+Mediatheque::Mediatheque(){}; 
+Mediatheque::Mediatheque(const string &titre, int ID) : titre(titre), id(ID) {}
 Mediatheque::~Mediatheque() {}
 
-void Mediatheque::afficher(string& chemin) 
+void Mediatheque::afficher(string &chemin)
 {
     ifstream fichier(chemin);
     string ligne;
@@ -24,7 +24,7 @@ void Mediatheque::afficher(string& chemin)
     }
 }
 
-void Mediatheque::rechercher(string& chemin, string& recherche) // Retirer const si non souhaité
+void Mediatheque::rechercher(string &chemin, string &recherche) // Retirer const si non souhaité
 {
     ifstream fichier(chemin);
     string line;
@@ -54,7 +54,7 @@ void Mediatheque::rechercher(string& chemin, string& recherche) // Retirer const
     }
 }
 
-void Mediatheque::supprimer(string& chemin, string& basechemin, int& id) // Retirer const si non souhaité
+void Mediatheque::supprimer(string &chemin, string &basechemin, int &id) // Retirer const si non souhaité
 {
     string chemin_temp = basechemin + "cd_temp.txt";
     string line;
@@ -105,7 +105,7 @@ void Mediatheque::supprimer(string& chemin, string& basechemin, int& id) // Reti
     }
 }
 
-void Mediatheque::ajouter(string& chemin, string& donnees) // Retirer const si non souhaité
+void Mediatheque::ajouter(const string &chemin, string &donnees) // Retirer const si non souhaité
 {
     ofstream fichier(chemin);
     if (fichier.is_open())

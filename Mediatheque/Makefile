@@ -1,15 +1,16 @@
 # Nom de l'exécutable
 EXEC = main
 
-# Répertoires des fichiers sources et d'inclusion
+# Répertoires des fichiers sources, d'inclusion et de build
 SRC_DIR = src
 INCLUDE_DIR = include
+BUILD_DIR = build
 
 # Fichiers source nécessaires pour le test
 SRCS = main.cpp $(SRC_DIR)/CD.cpp $(SRC_DIR)/Mediatheque.cpp
 
-# Fichiers objets correspondants
-OBJS = $(SRCS:.cpp=.o)
+# Fichiers objets correspondants (placés dans le répertoire build)
+OBJS = $(patsubst %.cpp,$(BUILD_DIR)/%.o,$(notdir $(SRCS)))
 
 # Options du compilateur
 CXX = g++
@@ -20,10 +21,14 @@ $(EXEC): $(OBJS)
 	$(CXX) -o $(EXEC) $(OBJS)
 
 # Règle de compilation des fichiers .o à partir des fichiers .cpp
-%.o: %.cpp
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
+	mkdir -p $(BUILD_DIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+$(BUILD_DIR)/main.o: main.cpp
+	mkdir -p $(BUILD_DIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # Nettoyage des fichiers objets et de l'exécutable
 clean:
-	rm -f $(OBJS) $(EXEC)
-
+	rm -rf $(BUILD_DIR)/*.o $(EXEC)
