@@ -24,7 +24,7 @@ void Mediatheque::afficher(string &chemin)
     }
 }
 
-void Mediatheque::rechercher(string &chemin, string &recherche) // Retirer const si non souhaité
+void Mediatheque::rechercher(string &chemin, string &recherche)
 {
     ifstream fichier(chemin);
     string line;
@@ -54,7 +54,7 @@ void Mediatheque::rechercher(string &chemin, string &recherche) // Retirer const
     }
 }
 
-void Mediatheque::supprimer(string &chemin, string &basechemin, int &id) // Retirer const si non souhaité
+void Mediatheque::supprimer(string &chemin, string &basechemin, int &id) 
 {
     string chemin_temp = basechemin + "cd_temp.txt";
     string line;
@@ -105,9 +105,9 @@ void Mediatheque::supprimer(string &chemin, string &basechemin, int &id) // Reti
     }
 }
 
-void Mediatheque::ajouter(const string &chemin, string &donnees) // Retirer const si non souhaité
+void Mediatheque::ajouter(string &chemin, string &donnees) 
 {
-    ofstream fichier(chemin);
+    ofstream fichier(chemin,ios::app);
     if (fichier.is_open())
     {
         fichier << donnees << endl;

@@ -21,7 +21,7 @@ public:
     virtual void afficher(string &chemin);
     virtual void rechercher(string &chemin, string &recherche);
     virtual void supprimer(string &chemin, string &basechemin, int &ID);
-    virtual void ajouter(const string &chemin, string &donnees);
+    virtual void ajouter(string &chemin, string &donnees);
 
 protected:
     string titre;

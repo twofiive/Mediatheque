@@ -1,6 +1,5 @@
 #ifndef CD_H
 #define CD_H
-#define CHEMIN_CD "/home/hcosse/gestion_notice/cd/cd.txt"
 #define AJOUTER 1
 #define SUPPRIMER 2
 #define RECHERCHER 3
@@ -30,7 +29,7 @@ protected:
     string donnees;
 
 private:
-    const string nomfichier = "cd.txt";
+    const string chemin;
 };
 
 #endif
