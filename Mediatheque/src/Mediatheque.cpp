@@ -6,7 +6,7 @@ Mediatheque::Mediatheque(){};
 Mediatheque::Mediatheque(const string &titre, int ID) : titre(titre), id(ID) {}
 Mediatheque::~Mediatheque() {}
 
-void Mediatheque::afficher(string &chemin)
+void Mediatheque::afficher(const string &chemin)
 {
     ifstream fichier(chemin);
     string ligne;
@@ -24,17 +24,18 @@ void Mediatheque::afficher(string &chemin)
     }
 }
 
-void Mediatheque::rechercher(string &chemin, string &recherche)
+void Mediatheque::rechercher(const string &chemin,string &titre,int &id)
 {
     ifstream fichier(chemin);
     string line;
     bool wfind = false;
+    string idStr = to_string(id);
 
     if (fichier.is_open())
     {
         while (getline(fichier, line))
         {
-            if (line.find(recherche) != string::npos)
+            if (line.find(titre) != string::npos && line.find(idStr) != string::npos)
             {
                 cout << "Resultat de la recherche : " << endl;
                 cout << line << endl;
@@ -105,7 +106,7 @@ void Mediatheque::supprimer(string &chemin, string &basechemin, int &id)
     }
 }
 
-void Mediatheque::ajouter(string &chemin, string &donnees) 
+void Mediatheque::ajouter(const string &chemin, string &donnees) 
 {
     ofstream fichier(chemin,ios::app);
     if (fichier.is_open())

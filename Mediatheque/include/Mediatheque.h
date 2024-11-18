@@ -18,10 +18,10 @@ public:
     Mediatheque(const string &titre, int ID);
 
     virtual ~Mediatheque();
-    virtual void afficher(string &chemin);
-    virtual void rechercher(string &chemin, string &recherche);
+    virtual void afficher(const string &chemin);
+    virtual void rechercher(const string &chemin,string &titre,int &id);
     virtual void supprimer(string &chemin, string &basechemin, int &ID);
-    virtual void ajouter(string &chemin, string &donnees);
+    virtual void ajouter(const string &chemin, string &donnees);
 
 protected:
     string titre;

@@ -36,8 +36,7 @@ int main()
         }
         case QUITTER:
         {
-            /* code */
-            break;
+            exit(0);
         }
         default:
             break;
