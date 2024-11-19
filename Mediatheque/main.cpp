@@ -13,6 +13,7 @@ int main()
         cout << "2- Gestion des notice Livre" << endl;
         cout << "3- Gestion des notice Video" << endl;
         cout << "4- Quitter " << endl;
+        cout << "Saisie : ";
         cin >> choix;
 
         switch (choix)
@@ -39,7 +40,10 @@ int main()
             exit(0);
         }
         default:
-            break;
+        {
+            cout << "Saisie incorrect ! " << endl;
         }
-    } while (choix != QUITTER);
+        break;
+        }
+    } while (choix == GESTION_CD || choix == GESTION_LIVRE || choix == GESTION_VIDEO || choix == QUITTER);
 }
