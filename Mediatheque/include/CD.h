@@ -5,7 +5,7 @@
 #define RECHERCHER 3
 #define AFFICHER 4
 #define RETOUR 5
-#define CHEMIN_CD "/home/hcosse/gestion_notice/cd/cd.txt"
+#define CHEMIN_CD "cd.txt"
 
 
 #include "Mediatheque.h"

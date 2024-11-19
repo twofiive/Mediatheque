@@ -2,7 +2,7 @@
 #define MEDIATHEQUE_H
 #define GESTION_CD 1
 #define GESTION_LIVRE 2
-#define GESTION_VIDEO 3
+#define GESTION_FILM 3
 #define QUITTER 4
 
 #include <iostream>

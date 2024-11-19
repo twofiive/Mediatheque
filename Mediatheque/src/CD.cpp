@@ -11,12 +11,12 @@ void CD::menucd()
     int choixcd;
     do
     {
-        cout << "============ MENU MEDIATHEQUE ============" << endl;
-        cout << "1- Ajout d'une notice CD " << endl;
-        cout << "2- Supprimer des notices CD" << endl;
-        cout << "3- Rechercher des notices CD" << endl;
-        cout << "4- Afficher une notice CD" << endl;
-        cout << "5- Retour menu principal" << endl;
+        cout << "============ MENU CD ============" << endl;
+        cout << AJOUTER << " - Ajout d'une notice " << endl;
+        cout << SUPPRIMER << " - Supprimer des notices " << endl;
+        cout << RECHERCHER << " - Rechercher des notices " << endl;
+        cout << AFFICHER << " - Afficher une notice " << endl;
+        cout << RETOUR << " - Retour menu principal" << endl;
         cout << "Saisie : " << endl;
         cin >> choixcd;
 
@@ -26,11 +26,11 @@ void CD::menucd()
         {
             string titre, interprete, label, donnees, input;
             int id;
-        
-                cout << "============ AJOUT NOTICE CD ============" << endl;
+
+                cout << "============ AJOUT NOTICE ============" << endl;
                 cout << "Saisir le titre : ";
                 cin >> titre;
-                cout<< "Saisir l'interprete :";
+                cout<< "Saisir l'interprete : ";
                 cin >> interprete;
                 cout << "Saisir le label : ";
                 cin >> label;
@@ -69,7 +69,7 @@ void CD::menucd()
             cout << "============ RECHERCHE CD ============" << endl;
             cout << "Saisir le titre rechercher :" << endl;
             cin >> titre;
-            cout << "Saisir l'ID rechercher :" << endl;
+            cout << "Saisir l'ID rechercher : " << endl;
             cin >> id;
             recherchecd.Mediatheque::rechercher(chemin, titre, id);
             break;
@@ -93,4 +93,4 @@ void CD::menucd()
         }
         while (choixcd != RETOUR)
             ;
-    }
+}

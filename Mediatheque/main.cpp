@@ -1,5 +1,7 @@
 #include <Mediatheque.h>
 #include <CD.h>
+#include <film.h>
+#include <livre.h>
 
 int main()
 {
@@ -9,10 +11,10 @@ int main()
     {
 
         cout << "============ MENU MEDIATHEQUE ============" << endl;
-        cout << "1- Gestion des notice CD " << endl;
-        cout << "2- Gestion des notice Livre" << endl;
-        cout << "3- Gestion des notice Video" << endl;
-        cout << "4- Quitter " << endl;
+        cout << GESTION_CD << " - Gestion des notice CD " << endl;
+        cout << GESTION_LIVRE << " - Gestion des notice Livre" << endl;
+        cout << GESTION_FILM << " - Gestion des notice Film" << endl;
+        cout << QUITTER << " - Quitter " << endl;
         cout << "Saisie : ";
         cin >> choix;
 
@@ -26,13 +28,15 @@ int main()
         }
         case GESTION_LIVRE:
         {
-            /* code */
+            Livre livreA;
+            livreA.menulivre();
             break;
         }
 
-        case GESTION_VIDEO:
+        case GESTION_FILM:
         {
-            /* code */
+            Film film;
+            film.menufilm();
             break;
         }
         case QUITTER:
@@ -45,5 +49,5 @@ int main()
         }
         break;
         }
-    } while (choix == GESTION_CD || choix == GESTION_LIVRE || choix == GESTION_VIDEO || choix == QUITTER);
+    } while (choix == GESTION_CD || choix == GESTION_LIVRE || choix == GESTION_FILM || choix == QUITTER);
 }

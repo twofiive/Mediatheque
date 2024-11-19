@@ -34,9 +34,13 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="include/CD.h" />
+		<Unit filename="include/Film.h" />
 		<Unit filename="include/Livre.h" />
 		<Unit filename="include/Mediatheque.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/CD.cpp" />
+		<Unit filename="src/Film.cpp" />
 		<Unit filename="src/Livre.cpp" />
 		<Unit filename="src/Mediatheque.cpp" />
 		<Extensions>

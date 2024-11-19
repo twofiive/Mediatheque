@@ -1,17 +1,20 @@
 #ifndef FILM_H
 #define FILM_H
-
+#define AJOUTER 1
+#define SUPPRIMER 2
+#define RECHERCHER 3
+#define AFFICHER 4
+#define RETOUR 5
+#define CHEMIN_FILM "film.txt"
 #include <Mediatheque.h>
-
 
 class Film : public Mediatheque
 {
     public:
         Film();
-        # Constructeur hérite du constructeur de base de la classe médiathèque avec titre et ID et
-        # ajoute les attributs spécifique à la classe interprète et label
-        Film(const Film& other, const string& producteur, const string& realisateur, int ID) :
-          Mediatheque(Titre, ID), producteur(producteur), realisateur(realisateur);
+        Film(const string& titre, int ID,const string& producteur, const string& realisateur);
+        ~Film();
+        void menufilm();
         void ajouter();
         void supprimer();
         void rechercher();
@@ -23,7 +26,7 @@ class Film : public Mediatheque
         string donnees;
 
     private:
-        const string nomfichier = film.txt
+        const string nomfichier;
 };
 
 #endif // FILM_H
