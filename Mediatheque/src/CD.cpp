@@ -162,7 +162,8 @@ void CD::menucd()
                 break;
             }
             default:
-                break;
+            cerr << "Option invalide." << endl;
+            break;    
             }
         }
         case RETOUR:
