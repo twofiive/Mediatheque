@@ -6,8 +6,12 @@ SRC_DIR = src
 INCLUDE_DIR = include
 BUILD_DIR = build
 
-# Fichiers source nécessaires pour le test
-SRCS = main.cpp $(SRC_DIR)/CD.cpp $(SRC_DIR)/Mediatheque.cpp
+# Fichiers source nécessaires pour le projet
+SRCS = main.cpp \
+       $(SRC_DIR)/CD.cpp \
+       $(SRC_DIR)/Mediatheque.cpp \
+       $(SRC_DIR)/Livre.cpp \
+       $(SRC_DIR)/Film.cpp
 
 # Fichiers objets correspondants (placés dans le répertoire build)
 OBJS = $(patsubst %.cpp,$(BUILD_DIR)/%.o,$(notdir $(SRCS)))

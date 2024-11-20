@@ -4,9 +4,15 @@
 #define SUPPRIMER 2
 #define RECHERCHER 3
 #define AFFICHER 4
-#define RETOUR 5
-#define CHEMIN_CD "cd.txt"
+#define MODIFIER 5
+#define RETOUR 6
 
+#define TITRE_CD 10
+#define AUTEUR_CD 11
+#define LABEL_CD 12
+#define IDENTIFIANT_CD 13
+#define RETOUR_MODIF_CD 14
+#define CHEMIN_CD "/home/hcosse/gestion_notice/cd/cd.txt"
 
 #include "Mediatheque.h"
 
@@ -24,14 +30,15 @@ public:
     void supprimer();
     void rechercher();
     void afficher();
+    void modifier();
 
 protected:
     string interprete;
     string label;
-    string donnees;
+    string data;
 
 private:
-    const string chemin;
+    const string path;
 };
 
 #endif
