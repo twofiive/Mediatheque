@@ -1,2 +1,0 @@
-Titre;ID;Producteur;Réalisateur
-eess,4879,sde,es

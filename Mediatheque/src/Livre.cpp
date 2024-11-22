@@ -25,7 +25,7 @@ void Livre::menulivre()
         {
         case AJOUTER:
         {
-            string titre, auteur, editeur, data, input;
+            string titre, auteur, editeur, data, input, entete;
             int id;
 
             cout << "============ AJOUT NOTICE ============" << endl;
@@ -35,13 +35,19 @@ void Livre::menulivre()
             cin >> auteur;
             cout << "Saisir le editeur : ";
             cin >> editeur;
-            cout << "Saisir l'identifiant (4 nombre) : ";
-            cin >> id;
+            do
+            {
+                cout << "Saisir l'identifiant (4 nombre) : ";
+                cin >> id;
+            }
+            while ( id < 1000 || id >= 10000 );
 
             const string path = CHEMIN_LIVRE;
 
             Livre noticelivre(titre, id, auteur, editeur);
-            data = titre + "," + to_string(id) + "," + auteur + "," + editeur;
+            entete = string("Titre") + ";" + "ID" + ";" + "Auteur" + ";" + "Editeur";
+            noticelivre.Mediatheque::ajouter(path, entete);
+            data = titre + ";" + to_string(id) + ";" + auteur + ";" + editeur;
             noticelivre.Mediatheque::ajouter(path, data);
             break;
         }
@@ -55,8 +61,12 @@ void Livre::menulivre()
             Livre affichelivre;
             affichelivre.Mediatheque::afficher(path);
             cout << "============ SUPPRESSION LIVRE ============" << endl;
-            cout << "Saisir l'identifiant de la notice a supprimer (4 nombre) : " << endl;
-            cin >> id;
+            do
+            {
+                cout << "Saisir l'identifiant de la notice a supprimer (4 nombre) : " << endl;
+                cin >> id;
+            }
+            while ( id < 1000 || id >= 10000 );
             Livre noticesupp;
             noticesupp.Mediatheque::supprimer(path, basepath, id);
             break;
@@ -71,8 +81,12 @@ void Livre::menulivre()
             cout << "============ RECHERCHE LIVRE ============" << endl;
             cout << "Saisir le titre rechercher : ";
             cin >> titre;
-            cout << "Saisir l'ID rechercher : ";
-            cin >> id;
+            do
+            {
+                cout << "Saisir l'ID rechercher : ";
+                cin >> id;
+            }
+            while ( id < 1000 || id >= 10000 );
             recherchelivre.Mediatheque::rechercher(path, titre, id);
             break;
         }
@@ -86,7 +100,7 @@ void Livre::menulivre()
         case MODIFIER:
         {
             const string path = CHEMIN_LIVRE;
-            string basepath = "/home/hcosse/gestion_notice/cd/";
+            string basepath = "./";
             string to_update;
             string upwd;
             int choix_update;
@@ -154,11 +168,20 @@ void Livre::menulivre()
                 int update_id;
 
                 cout << endl;
-                cout << "Saisir l'ID a modifier : " << endl;
-                cin >> to_update_id;
-                cout << endl;
-                cout << "Saisir le nouvel ID : " << endl;
-                cin >> update_id;
+                do
+                {
+                    cout << "Saisir l'ID a modifier : " << endl;
+                    cin >> to_update_id;
+                }
+                while ( to_update_id < 1000 || to_update_id >= 10000 );
+
+                do
+                {
+                    cout << endl;
+                    cout << "Saisir le nouvel ID : " << endl;
+                    cin >> update_id;
+                }
+                while ( update_id < 1000 || update_id >= 10000 );
 
                 to_update = to_string(to_update_id);
                 upwd = to_string(update_id);

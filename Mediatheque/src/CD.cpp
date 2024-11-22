@@ -25,7 +25,7 @@ void CD::menucd()
         {
         case AJOUTER:
         {
-            string titre, interprete, label, data, input;
+            string titre, interprete, label, data, input, entete;
             int id;
 
             cout << "============ AJOUT NOTICE ============" << endl;
@@ -35,13 +35,19 @@ void CD::menucd()
             cin >> interprete;
             cout << "Saisir le label : ";
             cin >> label;
-            cout << "Saisir l'identifiant (4 nombre) : ";
-            cin >> id;
+            do
+            {
+                cout << "Saisir l'identifiant (4 nombre) : ";
+                cin >> id;
+            }
+            while ( id < 1000 || id >= 10000 );
 
             const string path = CHEMIN_CD;
 
             CD noticecd(titre, id, interprete, label);
-            data = titre + "," + to_string(id) + "," + interprete + "," + label;
+            entete = string("Titre") + ";" + "ID" + ";" + "Interprete" + ";" + "Label";
+            noticecd.Mediatheque::ajouter(path, entete);
+            data = titre + ";" + to_string(id) + ";" + interprete + ";" + label;
             noticecd.Mediatheque::ajouter(path, data);
             break;
         }
@@ -53,8 +59,12 @@ void CD::menucd()
             CD affichecd;
             affichecd.Mediatheque::afficher(path);
             cout << "============ SUPPRESSION CD ============" << endl;
-            cout << "Saisir l'identifiant de la notice à supprimer (4 nombre) : " << endl;
-            cin >> id;
+            do
+            {
+                cout << "Saisir l'identifiant de la notice à supprimer (4 nombre) : " << endl;
+                cin >> id;
+            }
+            while ( id < 1000 || id > 10000 );
             CD noticesupp;
             noticesupp.Mediatheque::supprimer(path, basepath, id);
             break;
@@ -69,8 +79,12 @@ void CD::menucd()
             cout << "============ RECHERCHE CD ============" << endl;
             cout << "Saisir le titre rechercher :" << endl;
             cin >> titre;
-            cout << "Saisir l'ID rechercher : " << endl;
-            cin >> id;
+            do
+            {
+                cout << "Saisir l'ID rechercher : ";
+                cin >> id;
+            }
+            while ( id < 1000 || id > 10000 );
             recherchecd.Mediatheque::rechercher(path, titre, id);
             break;
         }
@@ -150,11 +164,19 @@ void CD::menucd()
                 int update_id;
 
                 cout << endl;
-                cout << "Saisir l'ID a modifier : " << endl;
-                cin >> to_update_id;
+                do
+                {
+                    cout << "Saisir l'ID a modifier : " << endl;
+                    cin >> to_update_id;
+                }
+                while ( to_update_id < 1000 || to_update_id > 10000 );
                 cout << endl;
-                cout << "Saisir le nouvel ID : " << endl;
-                cin >> update_id;
+                do
+                {
+                    cout << "Saisir le nouvel ID : " << endl;
+                    cin >> update_id;
+                }
+                while ( update_id < 1000 || update_id > 10000 );
 
                 to_update = to_string(to_update_id);
                 upwd = to_string(update_id);
@@ -167,8 +189,8 @@ void CD::menucd()
                 break;
             }
             default:
-            cerr << "Option invalide." << endl;
-            break;
+                cerr << "Option invalide." << endl;
+                break;
             }
         }
         case RETOUR:
@@ -179,5 +201,6 @@ void CD::menucd()
             cerr << "Option invalide." << endl;
             break;
         }
-    } while (choixcd != RETOUR);
+    }
+    while (choixcd != RETOUR);
 }
