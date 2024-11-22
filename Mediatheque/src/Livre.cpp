@@ -99,16 +99,23 @@ void Livre::menulivre()
             cout << EDITEUR_LIVRE << " - Editeur" << endl;
             cout << IDENTIFIANT_LIVRE << " - ID" << endl;
             cout << RETOUR_MODIF_LIVRE << " - Retour menu gestion Livre " << endl;
-            cout << "Saisir l'attribut à modifier : " << endl;
+            cout << "Saisir l'attribut a modifier : " << endl;
             cin >> choix_update;
             cout << endl;
+
+            if (choix_update == TITRE_LIVRE || choix_update == AUTEUR_LIVRE || choix_update == EDITEUR_LIVRE || choix_update == IDENTIFIANT_LIVRE )
+            {
+                cout << "Liste des livres : " << endl;
+                updatelivre.Mediatheque::afficher(path);
+                cout << endl;
+            }
 
             switch (choix_update)
             {
             case TITRE_LIVRE:
             {
                 cout << endl;
-                cout << "Saisir le titre à modifier : " << endl;
+                cout << "Saisir le titre a modifier : " << endl;
                 cin >> to_update;
                 cout << endl;
                 cout << "Saisir le nouveau titre : " << endl;
@@ -120,7 +127,7 @@ void Livre::menulivre()
             case AUTEUR_LIVRE:
             {
                 cout << endl;
-                cout << "Saisir l'auteur à modifier : " << endl;
+                cout << "Saisir l'auteur a modifier : " << endl;
                 cin >> to_update;
                 cout << endl;
                 cout << "Saisir le nouvel auteur : " << endl;
@@ -132,7 +139,7 @@ void Livre::menulivre()
             case EDITEUR_LIVRE:
             {
                 cout << endl;
-                cout << "Saisir l'editeur à modifier : " << endl;
+                cout << "Saisir l'editeur a modifier : " << endl;
                 cin >> to_update;
                 cout << endl;
                 cout << "Saisir le nouvel editeur : " << endl;
@@ -147,7 +154,7 @@ void Livre::menulivre()
                 int update_id;
 
                 cout << endl;
-                cout << "Saisir l'ID à modifier : " << endl;
+                cout << "Saisir l'ID a modifier : " << endl;
                 cin >> to_update_id;
                 cout << endl;
                 cout << "Saisir le nouvel ID : " << endl;
@@ -176,5 +183,6 @@ void Livre::menulivre()
             cerr << "Option invalide." << endl;
             break;
         }
-    } while (choixlivre != RETOUR);
+    }
+    while (choixlivre != RETOUR);
 }

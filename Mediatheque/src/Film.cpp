@@ -26,7 +26,7 @@ void Film::menufilm()
         {
         case AJOUTER:
         {
-            string titre, producteur, realisateur, data, input;
+            string titre, producteur, realisateur, data, input, entete;
             int id;
 
             cout << "============ AJOUT NOTICE ============" << endl;
@@ -36,13 +36,20 @@ void Film::menufilm()
             cin >> producteur;
             cout << "Saisir le realisateur : ";
             cin >> realisateur;
-            cout << "Saisir l'identifiant (4 nombre) : ";
-            cin >> id;
+            do
+            {
+                cout << "Saisir l'identifiant (4 nombre) : ";
+                cin >> id;
+            }
+            while ( id < 1000 || id >= 10000 );
+
 
             const string path = CHEMIN_FILM;
 
             Film noticefilm(titre, id, producteur, realisateur);
-            data = titre + "," + to_string(id) + "," + producteur + "," + realisateur;
+            entete = string("Titre") + ";" + "ID" + ";" + "Producteur" + ";" + "Realisateur";
+            noticefilm.Mediatheque::ajouter(path, entete);
+            data = titre + ";" + to_string(id) + ";" + producteur + ";" + realisateur;
             noticefilm.Mediatheque::ajouter(path, data);
             break;
         }
@@ -51,12 +58,12 @@ void Film::menufilm()
             int id;
             string path;
             string basepath;
-            path = "/home/hcosse/gestion_notice/film/film.txt";
-            basepath = "/home/hcosse/gestion_notice/film/";
+            path = "film.txt";
+            basepath = "film/";
             Film affichefilm;
             affichefilm.Mediatheque::afficher(path);
             cout << "============ SUPPRESSION FILM ============" << endl;
-            cout << "Saisir l'identifiant de la notice � supprimer (4 nombre) : " << endl;
+            cout << "Saisir l'identifiant de la notice a supprimer (4 chiffres) : " << endl;
             cin >> id;
             Film noticesupp;
             noticesupp.Mediatheque::supprimer(path, basepath, id);
@@ -88,7 +95,7 @@ void Film::menufilm()
         case MODIFIER:
         {
             const string path = CHEMIN_FILM;
-            string basepath = "/home/hcosse/gestion_notice/cd/";
+            string basepath = "./";
             string to_update;
             string upwd;
             int choix_update;
@@ -101,16 +108,24 @@ void Film::menufilm()
             cout << REALISATEUR_FILM << " - Realisateur" << endl;
             cout << IDENTIFIANT_FILM << " - ID" << endl;
             cout << RETOUR_MODIF_FILM << " - Retour menu gestion FILM  " << endl;
-            cout << "Saisir l'attribut à modifier : " << endl;
+            cout << "Saisir l'attribut a modifier : " << endl;
             cin >> choix_update;
             cout << endl;
+
+            if (choix_update == TITRE_FILM || choix_update == PRODUCTEUR_FILM || choix_update == REALISATEUR_FILM || choix_update == IDENTIFIANT_FILM )
+            {
+                cout << "Liste des films : " << endl;
+                updatefilm.Mediatheque::afficher(path);
+                cout << endl;
+            }
+
 
             switch (choix_update)
             {
             case TITRE_FILM:
             {
                 cout << endl;
-                cout << "Saisir le titre à modifier : " << endl;
+                cout << "Saisir le titre a modifier : " << endl;
                 cin >> to_update;
                 cout << endl;
                 cout << "Saisir le nouveau titre : " << endl;
@@ -122,7 +137,7 @@ void Film::menufilm()
             case PRODUCTEUR_FILM:
             {
                 cout << endl;
-                cout << "Saisir le producteur à modifier : " << endl;
+                cout << "Saisir le producteur a modifier : " << endl;
                 cin >> to_update;
                 cout << endl;
                 cout << "Saisir le nouveau producteur : " << endl;
@@ -149,7 +164,7 @@ void Film::menufilm()
                 int update_id;
 
                 cout << endl;
-                cout << "Saisir l'ID à modifier : " << endl;
+                cout << "Saisir l'ID a modifier : " << endl;
                 cin >> to_update_id;
                 cout << endl;
                 cout << "Saisir le nouvel ID : " << endl;
@@ -176,5 +191,6 @@ void Film::menufilm()
             cerr << "Option invalide." << endl;
             break;
         }
-    } while (choixfilm != RETOUR);
+    }
+    while (choixfilm != RETOUR);
 }

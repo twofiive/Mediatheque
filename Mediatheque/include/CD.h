@@ -12,7 +12,7 @@
 #define LABEL_CD 12
 #define IDENTIFIANT_CD 13
 #define RETOUR_MODIF_CD 14
-#define CHEMIN_CD "/home/hcosse/gestion_notice/cd/cd.txt"
+#define CHEMIN_CD "cd.txt"
 
 #include "Mediatheque.h"
 

@@ -1,37 +1,38 @@
 # depslib dependency file v1.0
-1732053484 source:c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\main.cpp
-	<Mediatheque.h>
-	<CD.h>
-	<film.h>
-	<livre.h>
+1732241969 source:c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\main.cpp
+	"Mediatheque.h"
+	"CD.h"
+	"Film.h"
+	"Livre.h"
 
-1732052393 c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\include\mediatheque.h
+1732241969 c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\include\mediatheque.h
 	<iostream>
 	<string>
 	<fstream>
 
-1732009409 c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\include\cd.h
+1732242926 c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\include\cd.h
 	"Mediatheque.h"
 
-1732053224 source:c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\src\cd.cpp
+1732243567 source:c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\src\cd.cpp
 	"CD.h"
 	<iostream>
 
-1732007129 source:c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\src\mediatheque.cpp
+1732241969 source:c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\src\mediatheque.cpp
 	"Mediatheque.h"
 	<string>
 	<iostream>
 	<fstream>
 
-1732053214 source:c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\src\film.cpp
+1732243091 source:c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\src\film.cpp
 	"Film.h"
 
-1732052182 c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\include\film.h
+1732244694 c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\include\film.h
 	<Mediatheque.h>
+	<string.h>
 
-1732053370 source:c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\src\livre.cpp
+1732243426 source:c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\src\livre.cpp
 	"Livre.h"
 
-1732053409 c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\include\livre.h
+1732243109 c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\include\livre.h
 	<Mediatheque.h>
 

@@ -49,7 +49,7 @@ void CD::menucd()
         {
 
             const string path = CHEMIN_CD;
-            string basepath = "/home/hcosse/gestion_notice/cd/";
+            string basepath = "cd/";
             CD affichecd;
             affichecd.Mediatheque::afficher(path);
             cout << "============ SUPPRESSION CD ============" << endl;
@@ -84,7 +84,7 @@ void CD::menucd()
         case MODIFIER:
         {
             const string path = CHEMIN_CD;
-            string basepath = "/home/hcosse/gestion_notice/cd/";
+            string basepath = "./";
             string to_update;
             string upwd;
             int choix_update;
@@ -97,16 +97,23 @@ void CD::menucd()
             cout << LABEL_CD << " - Label" << endl;
             cout << IDENTIFIANT_CD << " - ID" << endl;
             cout << RETOUR_MODIF_CD << " - Retour menu gestion CD " << endl;
-            cout << "Saisir l'attribut à modifier : " << endl;
+            cout << "Saisir l'attribut a modifier : " << endl;
             cin >> choix_update;
             cout << endl;
+
+            if (choix_update == TITRE_CD || choix_update == AUTEUR_CD || choix_update == LABEL_CD || choix_update == IDENTIFIANT_CD )
+            {
+                cout << "Liste des CDs : " << endl;
+                updatecd.Mediatheque::afficher(path);
+                cout << endl;
+            }
+
 
             switch (choix_update)
             {
             case TITRE_CD:
             {
-                cout << endl;
-                cout << "Saisir le titre à modifier : " << endl;
+                cout << "Saisir le titre a modifier : " << endl;
                 cin >> to_update;
                 cout << endl;
                 cout << "Saisir le nouveau titre : " << endl;
@@ -117,8 +124,7 @@ void CD::menucd()
             }
             case AUTEUR_CD:
             {
-                cout << endl;
-                cout << "Saisir l'auteur à modifier : " << endl;
+                cout << "Saisir l'auteur a modifier : " << endl;
                 cin >> to_update;
                 cout << endl;
                 cout << "Saisir le nouvel auteur : " << endl;
@@ -129,8 +135,7 @@ void CD::menucd()
             }
             case LABEL_CD:
             {
-                cout << endl;
-                cout << "Saisir le label à modifier : " << endl;
+                cout << "Saisir le label a modifier : " << endl;
                 cin >> to_update;
                 cout << endl;
                 cout << "Saisir le label : " << endl;
@@ -145,7 +150,7 @@ void CD::menucd()
                 int update_id;
 
                 cout << endl;
-                cout << "Saisir l'ID à modifier : " << endl;
+                cout << "Saisir l'ID a modifier : " << endl;
                 cin >> to_update_id;
                 cout << endl;
                 cout << "Saisir le nouvel ID : " << endl;
@@ -163,7 +168,7 @@ void CD::menucd()
             }
             default:
             cerr << "Option invalide." << endl;
-            break;    
+            break;
             }
         }
         case RETOUR:

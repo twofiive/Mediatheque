@@ -15,7 +15,7 @@
 #define IDENTIFIANT_LIVRE 13
 #define RETOUR_MODIF_LIVRE 15
 
-#define CHEMIN_LIVRE "/home/hcosse/gestion_notice/cd/livre.txt"
+#define CHEMIN_LIVRE "livre.txt"
 
 class Livre : public Mediatheque
 {

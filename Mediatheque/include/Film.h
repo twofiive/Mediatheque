@@ -12,8 +12,9 @@
 #define REALISATEUR_FILM 8
 #define IDENTIFIANT_FILM 9
 #define RETOUR_MODIF_FILM 13
-#define CHEMIN_FILM "film.txt"
+#define CHEMIN_FILM "film2.txt"
 #include <Mediatheque.h>
+#include <string.h>
 
 class Film : public Mediatheque
 {
