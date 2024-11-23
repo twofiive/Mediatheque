@@ -1,7 +1,11 @@
-#include "Mediatheque.h"
+/// Ici on appelle les différentes classes crées
+#include "Mediatheque.h" /// La classe parent
+/// Les classes fille
 #include "CD.h"
 #include "Film.h"
 #include "Livre.h"
+
+
 
 int main()
 {
@@ -9,7 +13,7 @@ int main()
 
     do
     {
-
+        /// Implementation du menu principal
         cout << "============ MENU MEDIATHEQUE ============" << endl;
         cout << GESTION_CD << " - Gestion des notice CD " << endl;
         cout << GESTION_LIVRE << " - Gestion des notice Livre" << endl;
@@ -22,12 +26,14 @@ int main()
         {
         case GESTION_CD:
         {
+            /// Création d'une classe et appel du menu
             CD cd;
             cd.menucd();
             break;
         }
         case GESTION_LIVRE:
         {
+            /// Création d'une classe et appel du menu
             Livre livreA;
             livreA.menulivre();
             break;
@@ -35,6 +41,7 @@ int main()
 
         case GESTION_FILM:
         {
+            /// Création d'une classe et appel du menu
             Film film;
             film.menufilm();
             break;
@@ -49,5 +56,6 @@ int main()
         }
         break;
         }
-    } while (choix == GESTION_CD || choix == GESTION_LIVRE || choix == GESTION_FILM || choix == QUITTER);
+    }
+    while (choix == GESTION_CD || choix == GESTION_LIVRE || choix == GESTION_FILM || choix == QUITTER);
 }

@@ -46,6 +46,7 @@ void Film::menufilm()
 
             const string path = CHEMIN_FILM;
 
+            /// Formatage du fichier
             Film noticefilm(titre, id, producteur, realisateur);
             entete = string("Titre") + ";" + "ID" + ";" + "Producteur" + ";" + "Realisateur";
             noticefilm.Mediatheque::ajouter(path, entete);
@@ -120,7 +121,7 @@ void Film::menufilm()
             cin >> choix_update;
             cout << endl;
 
-            if (choix_update == TITRE_FILM || choix_update == PRODUCTEUR_FILM || choix_update == REALISATEUR_FILM || choix_update == IDENTIFIANT_FILM )
+            if ( choix_update != RETOUR_MODIF_LIVRE )
             {
                 cout << "Liste des films : " << endl;
                 updatefilm.Mediatheque::afficher(path);

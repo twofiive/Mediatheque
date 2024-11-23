@@ -7,6 +7,8 @@
 #define MODIFIER 5
 #define RETOUR 6
 
+
+/// Declaration des MACROS pour le menu de modification
 #define TITRE_CD 10
 #define AUTEUR_CD 11
 #define LABEL_CD 12
@@ -33,6 +35,7 @@ public:
     void modifier();
 
 protected:
+    /// Declaration des attributs
     string interprete;
     string label;
     string data;

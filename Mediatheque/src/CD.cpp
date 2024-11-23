@@ -2,6 +2,7 @@
 #include <iostream>
 
 CD::CD() {};
+/// Surchage du constructeur
 CD::CD(const string &titre, int ID, const string &interprete, const string &label)
     : Mediatheque(titre, ID), interprete(interprete), label(label) {}
 CD::~CD() {}
@@ -115,7 +116,7 @@ void CD::menucd()
             cin >> choix_update;
             cout << endl;
 
-            if (choix_update == TITRE_CD || choix_update == AUTEUR_CD || choix_update == LABEL_CD || choix_update == IDENTIFIANT_CD )
+            if ( choix_update != RETOUR_MODIF_LIVRE )
             {
                 cout << "Liste des CDs : " << endl;
                 updatecd.Mediatheque::afficher(path);

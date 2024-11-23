@@ -1,13 +1,13 @@
 #include "Livre.h"
 
-Livre::Livre()
-{
-}
-
+Livre::Livre(){}
+/** Constructeur herite du constructeur de base de la classe mediatheque avec titre et ID et
+ajoute les attributs specifique a la classe interprete et label */
 Livre::Livre(const string &titre, int ID, const string &auteur, const string &editeur) : Mediatheque(titre, ID), auteur(auteur), editeur(editeur) {}
 
 void Livre::menulivre()
 {
+    /// Implementation du menu de la classe fille Livre
     int choixlivre;
     do
     {
@@ -25,6 +25,7 @@ void Livre::menulivre()
         {
         case AJOUTER:
         {
+            /// Déclaration des variables
             string titre, auteur, editeur, data, input, entete;
             int id;
 
@@ -35,6 +36,7 @@ void Livre::menulivre()
             cin >> auteur;
             cout << "Saisir le editeur : ";
             cin >> editeur;
+            /// Blindage de la variable ID
             do
             {
                 cout << "Saisir l'identifiant (4 nombre) : ";
@@ -59,7 +61,7 @@ void Livre::menulivre()
             path = "livre.txt";
             basepath = "livre/";
             Livre affichelivre;
-            affichelivre.Mediatheque::afficher(path);
+            affichelivre.Mediatheque::afficher(path); /// Appelle de la méthode afficher de la class parent Mediatheque
             cout << "============ SUPPRESSION LIVRE ============" << endl;
             do
             {
@@ -68,7 +70,7 @@ void Livre::menulivre()
             }
             while ( id < 1000 || id >= 10000 );
             Livre noticesupp;
-            noticesupp.Mediatheque::supprimer(path, basepath, id);
+            noticesupp.Mediatheque::supprimer(path, basepath, id); /// Appelle de la méthode supprimer de la class parent Mediatheque
             break;
         }
         case RECHERCHER:
@@ -99,10 +101,10 @@ void Livre::menulivre()
         }
         case MODIFIER:
         {
-            const string path = CHEMIN_LIVRE;
-            string basepath = "./";
+            const string path = CHEMIN_LIVRE; // Chemin du fichier déclaré en MACRO
+            string basepath = "./"; // Chemin du dossier dans lequel se trouve le fichier
             string to_update;
-            string upwd;
+            string upwd; // Nouvelle valeur
             int choix_update;
             Livre updatelivre;
 
@@ -117,7 +119,8 @@ void Livre::menulivre()
             cin >> choix_update;
             cout << endl;
 
-            if (choix_update == TITRE_LIVRE || choix_update == AUTEUR_LIVRE || choix_update == EDITEUR_LIVRE || choix_update == IDENTIFIANT_LIVRE )
+            /// Blindage de l'affichage au cas où l'utilisateur sorte du menu
+            if (choix_update != RETOUR_MODIF_LIVRE )
             {
                 cout << "Liste des livres : " << endl;
                 updatelivre.Mediatheque::afficher(path);
@@ -135,7 +138,7 @@ void Livre::menulivre()
                 cout << "Saisir le nouveau titre : " << endl;
                 cin >> upwd;
 
-                updatelivre.Mediatheque::modifier(path, basepath, to_update, upwd);
+                updatelivre.Mediatheque::modifier(path, basepath, to_update, upwd); // Appel de la méthode pour effectuer la modification des valeurs
                 break;
             }
             case AUTEUR_LIVRE:
@@ -147,7 +150,7 @@ void Livre::menulivre()
                 cout << "Saisir le nouvel auteur : " << endl;
                 cin >> upwd;
 
-                updatelivre.Mediatheque::modifier(path, basepath, to_update, upwd);
+                updatelivre.Mediatheque::modifier(path, basepath, to_update, upwd); // Appel de la méthode pour effectuer la modification des valeurs
                 break;
             }
             case EDITEUR_LIVRE:
@@ -159,7 +162,7 @@ void Livre::menulivre()
                 cout << "Saisir le nouvel editeur : " << endl;
                 cin >> upwd;
 
-                updatelivre.Mediatheque::modifier(path, basepath, to_update, upwd);
+                updatelivre.Mediatheque::modifier(path, basepath, to_update, upwd); // Appel de la méthode pour effectuer la modification des valeurs
                 break;
             }
             case IDENTIFIANT_LIVRE:
@@ -186,7 +189,7 @@ void Livre::menulivre()
                 to_update = to_string(to_update_id);
                 upwd = to_string(update_id);
 
-                updatelivre.Mediatheque::modifier(path, basepath, to_update, upwd);
+                updatelivre.Mediatheque::modifier(path, basepath, to_update, upwd); // Appel de la méthode pour effectuer la modification des valeurs
                 break;
             }
             case RETOUR_MODIF_LIVRE:
