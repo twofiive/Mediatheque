@@ -80,17 +80,33 @@ void Film::menufilm()
             int id;
             string path;
             path = CHEMIN_FILM;
-            Film recherchefilm;
-            cout << "============ RECHERCHE FILM ============" << endl;
+            Film film;
+            cout << "============ RECHERCHE LIVRE ============" << endl;
             cout << "Saisir le titre rechercher : ";
-            cin >> titre;
+
+            do
+            {
+                cin.ignore(); // Pour supprimer les entrées précedentes
+                getline(cin, titre);
+            }
+            while ( titre.empty() );
+
             do
             {
                 cout << "Saisir l'ID rechercher : ";
                 cin >> id;
+                if (id < 1000 && id >= 10000)
+                {
+                    cout << "L'ID doit être un nombre de 4 chiffres entre 1000 et 9999.\n";
+                }
             }
-            while ( id < 1000 || id > 10000 );
-            recherchefilm.Mediatheque::rechercher(path, titre, id);
+            while ( id < 1000 || id >= 10000 );
+            string idstr = to_string(id); // Pour changer le type int en string
+            vector <string> element = {titre, idstr}; // Les éléments sont placés dans un vecteur
+            vector <string> fichier; // Les éléments sont placés dans un vecteur
+            fichier.empty();
+            film.chargementdata(path, fichier);
+            film.rechercher(fichier, element, path);
             break;
         }
         case AFFICHER:

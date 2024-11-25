@@ -7,22 +7,22 @@
 Mediatheque::Mediatheque() {};
 //Constructeur avec paramètre qui prend en charge les attributs communs au trois classe fille
 Mediatheque::Mediatheque(const string &titre, int ID) : titre(titre), id(ID) {}
-//Destructeur 
+//Destructeur
 Mediatheque::~Mediatheque() {}
 
 
-// Affichage des notice 
+// Affichage des notice
 void Mediatheque::afficher(const string &path)//Prend en argument le chemin définies dans les macros des classe fille.
 {
-    ifstream fichier(path); // ifstream permet de lire un fichier 
-    string ligne;// ligne permet de stocker la ligne qui sera lu par getline 
-    if (fichier.is_open())// Vérifie si le fichier et bien ouvert 
+    ifstream fichier(path); // ifstream permet de lire un fichier
+    string ligne;// ligne permet de stocker la ligne qui sera lu par getline
+    if (fichier.is_open())// Vérifie si le fichier et bien ouvert
     {
-        while (getline(fichier, ligne))// getline permet de lire chaque ligne du fichier et de stocker la ligne afin de l'output 
+        while (getline(fichier, ligne))// getline permet de lire chaque ligne du fichier et de stocker la ligne afin de l'output
         {
             cout << ligne << endl;
         }
-        fichier.close(); // ferme le fichier après que chaque ligne du fichier est était output 
+        fichier.close(); // ferme le fichier après que chaque ligne du fichier est était output
     }
     else
     {
@@ -30,36 +30,27 @@ void Mediatheque::afficher(const string &path)//Prend en argument le chemin déf
     }
 }
 
-void Mediatheque::rechercher(const string &path, string &titre, int &id) // Les argument passés sont 
+void Mediatheque::rechercher(vector <string> &loadedData, vector <string> &data, const string &path) // Les argument passés sont
 {
-    ifstream fichier(path);
-    string line;
-    bool wfind = false; // Permet de definir si le mot à été trouvé par défaut sur false 
-    string idStr = to_string(id);// Transforme le int id en string 
+    bool wfind = false; // Permet de definir si le mot à été trouvé par défaut sur false
 
-    if (fichier.is_open())
+    for (const auto &line : loadedData)
     {
-        while (getline(fichier, line))
+        if (line.find(data[0]) != string::npos && line.find(data[1]) != string::npos)//Permet de comparer le titre et id passé en
         {
-            if (line.find(titre) != string::npos && line.find(idStr) != string::npos)//Permet de comparer le titre et id passé en 
-            {                                                                        //argument afin de comparer et de rechercher le titre et l'id dans le fichier 
-                cout << "Resultat de la recherche : " << endl;                       //npos est un indicateur de non-correspondance
-                cout << line << endl;
-                wfind = true;
-            }
-        }
-        fichier.close();
-
-        if (!wfind)
-        {
-            cerr << "La notice recherchée n'existe pas dans le fichier : " << path << endl;
+            //argument afin de comparer et de rechercher le titre et l'id dans le fichier
+            cout << "Resultat de la recherche : " << endl;                       //npos est un indicateur de non-correspondance
+            cout << line << endl;
+            wfind = true;
         }
     }
-    else
+
+    if (!wfind)
     {
-        cerr << "Erreur d'ouverture du fichier : " << path << endl;
+        cerr << "La notice recherchee n'existe pas dans le fichier : " << path << endl;
     }
 }
+
 
 void Mediatheque::supprimer(const string &path, string &basepath, int &id)
 {
@@ -176,5 +167,24 @@ void Mediatheque::modifier(const string &path, string &basepath, string &to_upda
     else
     {
         cerr << "Erreur lors de l'ouverture des fichiers." << endl;
+    }
+}
+
+void Mediatheque::chargementdata(const string &path,vector <string> &data)//Prend en argument le chemin définies dans les macros des classe fille.
+{
+    ifstream fichier(path); // ifstream permet de lire un fichier
+    string ligne;// ligne permet de stocker la ligne qui sera lu par getline
+    if (fichier.is_open())// Vérifie si le fichier et bien ouvert
+    {
+        data.clear();
+        while (getline(fichier, ligne))// getline permet de lire chaque ligne du fichier et de stocker la ligne afin de l'output
+        {
+            data.emplace_back(ligne);
+        }
+        fichier.close(); // ferme le fichier après que chaque ligne du fichier est était output
+    }
+    else
+    {
+        cerr << "Erreur d'ouverture du fichier : " << path << endl;
     }
 }

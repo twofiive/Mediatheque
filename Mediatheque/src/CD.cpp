@@ -76,17 +76,33 @@ void CD::menucd()
             int id;
             string path;
             path = CHEMIN_CD;
-            CD recherchecd;
-            cout << "============ RECHERCHE CD ============" << endl;
-            cout << "Saisir le titre rechercher :" << endl;
-            cin >> titre;
+            CD cd;
+            cout << "============ RECHERCHE LIVRE ============" << endl;
+            cout << "Saisir le titre rechercher : ";
+
+  //          do
+    //        {
+                cin.ignore(); // Pour supprimer les entrées précedentes
+                getline(cin, titre);
+          /**  }
+            while ( titre.empty() );
+*/
             do
             {
                 cout << "Saisir l'ID rechercher : ";
                 cin >> id;
+                if (id < 1000 && id >= 10000)
+                {
+                    cerr << "L'ID doit etre un nombre de 4 chiffres entre 1000 et 9999.\n";
+                }
             }
-            while ( id < 1000 || id > 10000 );
-            recherchecd.Mediatheque::rechercher(path, titre, id);
+            while ( id < 1000 || id >= 10000 );
+            string idstr = to_string(id); // Pour changer le type int en string
+            vector <string> element = {titre, idstr}; // Les éléments sont placés dans un vecteur
+            vector <string> fichier;// Les éléments sont placés dans un vecteur
+            fichier.empty();
+            cd.chargementdata(path, fichier);
+            cd.rechercher(fichier, element, path);
             break;
         }
         case AFFICHER:

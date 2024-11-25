@@ -5,34 +5,35 @@
 	"Film.h"
 	"Livre.h"
 
-1732346611 c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\include\mediatheque.h
+1732574184 c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\include\mediatheque.h
 	<iostream>
 	<string>
 	<fstream>
+	<vector>
 
-1732242926 c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\include\cd.h
+1732571220 c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\include\cd.h
 	"Mediatheque.h"
 
-1732311789 source:c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\src\cd.cpp
+1732571963 source:c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\src\cd.cpp
 	"CD.h"
 	<iostream>
 
-1732241969 source:c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\src\mediatheque.cpp
+1732571819 source:c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\src\mediatheque.cpp
 	"Mediatheque.h"
 	<string>
 	<iostream>
 	<fstream>
 
-1732311434 source:c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\src\film.cpp
+1732571232 source:c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\src\film.cpp
 	"Film.h"
 
-1732244694 c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\include\film.h
+1732571246 c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\include\film.h
 	<Mediatheque.h>
 	<string.h>
 
-1732366564 source:c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\src\livre.cpp
+1732573927 source:c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\src\livre.cpp
 	"Livre.h"
 
-1732349712 c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\include\livre.h
+1732571264 c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\include\livre.h
 	<Mediatheque.h>
 

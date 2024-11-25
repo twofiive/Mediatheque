@@ -26,7 +26,7 @@ public:
 
     void ajouter();
     void supprimer();
-    void rechercher();
+//    void rechercher();
     void afficher();
     void modifier();
     void menulivre();

@@ -10,6 +10,7 @@
 #include <iostream>
 #include <string>
 #include <fstream> /** Pour la gestion de fichiers */
+#include <vector>
 
 using namespace std;
 
@@ -24,10 +25,11 @@ public:
 
     /// Par contenu je fais référence au notice
     virtual void afficher(const string &path); /** Méthode pour afficher du contenu des classes fille */
-    virtual void rechercher(const string &path, string &titre, int &id); /** Méthode pour rechercher du contenu dans les classes fille */
+    virtual void rechercher( vector <string> &loadedData, vector <string> &data, const string &path); /** Méthode pour rechercher du contenu dans les classes fille */
     virtual void supprimer(const string &path, string &basepath, int &id); /** Méthode pour supprimer du contenu des classes fille */
     virtual void ajouter(const string &path, string &data); /** Méthode pour ajouter du contenu des classes fille */
     virtual void modifier(const string &path, string &basepath, string &to_update, string &updw); /** Méthode pour modifier le contenu des classes fille */
+    virtual void chargementdata(const string &path,vector <string> &data);
 
 protected:
 

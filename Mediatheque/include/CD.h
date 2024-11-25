@@ -28,11 +28,6 @@ public:
     ~CD();
 
     void menucd();
-    void ajouter();
-    void supprimer();
-    void rechercher();
-    void afficher();
-    void modifier();
 
 protected:
     /// Declaration des attributs
