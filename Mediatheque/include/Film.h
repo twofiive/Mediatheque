@@ -23,11 +23,6 @@ public:
     Film(const string &titre, int ID, const string &producteur, const string &realisateur);
     ~Film();
     void menufilm();
-    void ajouter();
-    void supprimer();
-//    void rechercher();
-    void afficher();
-    void modifier();
 
 protected:
     /// Declaration des attributs

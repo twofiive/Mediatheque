@@ -24,11 +24,6 @@ public:
     Livre();
     Livre(const string &titre, int ID, const string &auteur, const string &editeur);
 
-    void ajouter();
-    void supprimer();
-//    void rechercher();
-    void afficher();
-    void modifier();
     void menulivre();
 
 protected:
