@@ -86,7 +86,7 @@ void CD::menucd()
                 cin >> id;
             }
             while ( id < 1000 || id > 10000 );
-            recherchecd.Mediatheque::rechercher(path, titre, id);
+            recherchecd.Mediatheque::rechercher(path,data);
             break;
         }
         case AFFICHER:
@@ -134,7 +134,7 @@ void CD::menucd()
                 cout << "Saisir le nouveau titre : " << endl;
                 cin >> upwd;
 
-                updatecd.Mediatheque::modifier(path, basepath, to_update, upwd);
+                updatecd.Mediatheque::modifier(path,data);
                 break;
             }
             case AUTEUR_CD:
@@ -145,7 +145,7 @@ void CD::menucd()
                 cout << "Saisir le nouvel auteur : " << endl;
                 cin >> upwd;
 
-                updatecd.Mediatheque::modifier(path, basepath, to_update, upwd);
+                updatecd.Mediatheque::modifier(path, data);
                 break;
             }
             case LABEL_CD:
@@ -156,7 +156,7 @@ void CD::menucd()
                 cout << "Saisir le label : " << endl;
                 cin >> upwd;
 
-                updatecd.Mediatheque::modifier(path, basepath, to_update, upwd);
+                updatecd.Mediatheque::modifier(path, data);
                 break;
             }
             case IDENTIFIANT_CD:
@@ -182,7 +182,7 @@ void CD::menucd()
                 to_update = to_string(to_update_id);
                 upwd = to_string(update_id);
 
-                updatecd.Mediatheque::modifier(path, basepath, to_update, upwd);
+                updatecd.Mediatheque::modifier(path, data);
                 break;
             }
             case RETOUR_MODIF_CD:

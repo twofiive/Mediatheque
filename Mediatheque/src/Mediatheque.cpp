@@ -12,15 +12,16 @@ Mediatheque::~Mediatheque() {}
 
 
 // Affichage des notice 
-void Mediatheque::afficher(const string &path)//Prend en argument le chemin définies dans les macros des classe fille.
+void Mediatheque::afficher(const string &path,vector <string> &data)//Prend en argument le chemin définies dans les macros des classe fille.
 {
     ifstream fichier(path); // ifstream permet de lire un fichier 
     string ligne;// ligne permet de stocker la ligne qui sera lu par getline 
     if (fichier.is_open())// Vérifie si le fichier et bien ouvert 
     {
+        data.clear();
         while (getline(fichier, ligne))// getline permet de lire chaque ligne du fichier et de stocker la ligne afin de l'output 
         {
-            cout << ligne << endl;
+            data.emplace_back(ligne);
         }
         fichier.close(); // ferme le fichier après que chaque ligne du fichier est était output 
     }

@@ -6,10 +6,11 @@
 #define GESTION_FILM 3
 #define QUITTER 4
 
-/** Declaration des bibiliothèques */
+/** Declaration des bibiliothï¿½ques */
 #include <iostream>
 #include <string>
 #include <fstream> /** Pour la gestion de fichiers */
+#include <vector>
 
 using namespace std;
 
@@ -22,12 +23,13 @@ public:
 
     virtual ~Mediatheque(); /** Destructeur virtuel */
 
-    /// Par contenu je fais référence au notice
-    virtual void afficher(const string &path); /** Méthode pour afficher du contenu des classes fille */
-    virtual void rechercher(const string &path, string &titre, int &id); /** Méthode pour rechercher du contenu dans les classes fille */
-    virtual void supprimer(const string &path, string &basepath, int &id); /** Méthode pour supprimer du contenu des classes fille */
-    virtual void ajouter(const string &path, string &data); /** Méthode pour ajouter du contenu des classes fille */
-    virtual void modifier(const string &path, string &basepath, string &to_update, string &updw); /** Méthode pour modifier le contenu des classes fille */
+    /// Par contenu je fais rï¿½fï¿½rence au notice
+    virtual void afficher(const string &path,vector <string> &data); /** Mï¿½thode pour afficher du contenu des classes fille */
+    virtual void rechercher(const string &path, vector <string> &data); /** Mï¿½thode pour rechercher du contenu dans les classes fille */
+    virtual void supprimer(const string &path, vector <string>  &data); /** Mï¿½thode pour supprimer du contenu des classes fille */
+    virtual void ajouter(const string &path, vector <string> &data); /** Mï¿½thode pour ajouter du contenu des classes fille */
+    virtual void modifier(const string &path, vector <string> &data); /** Mï¿½thode pour modifier le contenu des classes fille */
+    virtual void chargementdata(const string &path,vector <string> &data);
 
 protected:
 
