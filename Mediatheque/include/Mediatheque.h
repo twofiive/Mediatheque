@@ -24,12 +24,13 @@ public:
     virtual ~Mediatheque(); /** Destructeur virtuel */
 
     /// Par contenu je fais r�f�rence au notice
-    virtual void afficher(const string &path,vector <string> &data); /** M�thode pour afficher du contenu des classes fille */
+    virtual void afficher(vector <string> &data); /** M�thode pour afficher du contenu des classes fille */
     virtual void rechercher(const string &path, vector <string> &data); /** M�thode pour rechercher du contenu dans les classes fille */
     virtual void supprimer(const string &path, vector <string>  &data); /** M�thode pour supprimer du contenu des classes fille */
     virtual void ajouter(const string &path, vector <string> &data); /** M�thode pour ajouter du contenu des classes fille */
     virtual void modifier(const string &path, vector <string> &data); /** M�thode pour modifier le contenu des classes fille */
     virtual void chargementdata(const string &path,vector <string> &data);
+    virtual void enregistrer(const string &path,vector <string> &data)
 
 protected:
 

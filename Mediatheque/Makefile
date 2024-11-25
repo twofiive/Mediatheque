@@ -9,8 +9,8 @@ BUILD_DIR = build
 # Fichiers source nécessaires pour le projet
 SRCS = main.cpp \
        $(SRC_DIR)/CD.cpp \
-       $(SRC_DIR)/Mediatheque.cpp \
-       $(SRC_DIR)/Livre.cpp \
+       #$(SRC_DIR)/Mediatheque.cpp \
+       #$(SRC_DIR)/Livre.cpp \
        $(SRC_DIR)/Film.cpp
 
 # Fichiers objets correspondants (placés dans le répertoire build)
