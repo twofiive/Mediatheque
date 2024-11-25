@@ -121,7 +121,7 @@ void Film::menufilm()
             cin >> choix_update;
             cout << endl;
 
-            if ( choix_update != RETOUR_MODIF_LIVRE )
+            if ( choix_update != RETOUR_MODIF_FILM )
             {
                 cout << "Liste des films : " << endl;
                 updatefilm.Mediatheque::afficher(path);

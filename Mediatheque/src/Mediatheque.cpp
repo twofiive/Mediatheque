@@ -2,21 +2,27 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+
+//Constructeur par défaut de la classe mère
 Mediatheque::Mediatheque() {};
+//Constructeur avec paramètre qui prend en charge les attributs communs au trois classe fille
 Mediatheque::Mediatheque(const string &titre, int ID) : titre(titre), id(ID) {}
+//Destructeur 
 Mediatheque::~Mediatheque() {}
 
-void Mediatheque::afficher(const string &path)
+
+// Affichage des notice 
+void Mediatheque::afficher(const string &path)//Prend en argument le chemin définies dans les macros des classe fille.
 {
-    ifstream fichier(path);
-    string ligne;
-    if (fichier.is_open())
+    ifstream fichier(path); // ifstream permet de lire un fichier 
+    string ligne;// ligne permet de stocker la ligne qui sera lu par getline 
+    if (fichier.is_open())// Vérifie si le fichier et bien ouvert 
     {
-        while (getline(fichier, ligne))
+        while (getline(fichier, ligne))// getline permet de lire chaque ligne du fichier et de stocker la ligne afin de l'output 
         {
             cout << ligne << endl;
         }
-        fichier.close();
+        fichier.close(); // ferme le fichier après que chaque ligne du fichier est était output 
     }
     else
     {
@@ -24,20 +30,20 @@ void Mediatheque::afficher(const string &path)
     }
 }
 
-void Mediatheque::rechercher(const string &path, string &titre, int &id)
+void Mediatheque::rechercher(const string &path, string &titre, int &id) // Les argument passés sont 
 {
     ifstream fichier(path);
     string line;
-    bool wfind = false;
-    string idStr = to_string(id);
+    bool wfind = false; // Permet de definir si le mot à été trouvé par défaut sur false 
+    string idStr = to_string(id);// Transforme le int id en string 
 
     if (fichier.is_open())
     {
         while (getline(fichier, line))
         {
-            if (line.find(titre) != string::npos && line.find(idStr) != string::npos)
-            {
-                cout << "Resultat de la recherche : " << endl;
+            if (line.find(titre) != string::npos && line.find(idStr) != string::npos)//Permet de comparer le titre et id passé en 
+            {                                                                        //argument afin de comparer et de rechercher le titre et l'id dans le fichier 
+                cout << "Resultat de la recherche : " << endl;                       //npos est un indicateur de non-correspondance
                 cout << line << endl;
                 wfind = true;
             }

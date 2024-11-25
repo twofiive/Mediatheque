@@ -116,7 +116,7 @@ void CD::menucd()
             cin >> choix_update;
             cout << endl;
 
-            if ( choix_update != RETOUR_MODIF_LIVRE )
+            if ( choix_update != RETOUR_MODIF_CD )
             {
                 cout << "Liste des CDs : " << endl;
                 updatecd.Mediatheque::afficher(path);

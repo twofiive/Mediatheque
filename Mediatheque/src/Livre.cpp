@@ -25,7 +25,7 @@ void Livre::menulivre()
         {
         case AJOUTER:
         {
-            /// Déclaration des variables
+            /// Dï¿½claration des variables
             string titre, auteur, editeur, data, input, entete;
             int id;
 
@@ -61,7 +61,7 @@ void Livre::menulivre()
             path = "livre.txt";
             basepath = "livre/";
             Livre affichelivre;
-            affichelivre.Mediatheque::afficher(path); /// Appelle de la méthode afficher de la class parent Mediatheque
+            affichelivre.Mediatheque::afficher(path); /// Appelle de la mï¿½thode afficher de la class parent Mediatheque
             cout << "============ SUPPRESSION LIVRE ============" << endl;
             do
             {
@@ -70,7 +70,7 @@ void Livre::menulivre()
             }
             while ( id < 1000 || id >= 10000 );
             Livre noticesupp;
-            noticesupp.Mediatheque::supprimer(path, basepath, id); /// Appelle de la méthode supprimer de la class parent Mediatheque
+            noticesupp.Mediatheque::supprimer(path, basepath, id); /// Appelle de la mï¿½thode supprimer de la class parent Mediatheque
             break;
         }
         case RECHERCHER:
@@ -101,7 +101,7 @@ void Livre::menulivre()
         }
         case MODIFIER:
         {
-            const string path = CHEMIN_LIVRE; // Chemin du fichier déclaré en MACRO
+            const string path = CHEMIN_LIVRE; // Chemin du fichier dï¿½clarï¿½ en MACRO
             string basepath = "./"; // Chemin du dossier dans lequel se trouve le fichier
             string to_update;
             string upwd; // Nouvelle valeur
@@ -119,7 +119,7 @@ void Livre::menulivre()
             cin >> choix_update;
             cout << endl;
 
-            /// Blindage de l'affichage au cas où l'utilisateur sorte du menu
+            /// Blindage de l'affichage au cas oï¿½ l'utilisateur sorte du menu
             if (choix_update != RETOUR_MODIF_LIVRE )
             {
                 cout << "Liste des livres : " << endl;
@@ -138,7 +138,7 @@ void Livre::menulivre()
                 cout << "Saisir le nouveau titre : " << endl;
                 cin >> upwd;
 
-                updatelivre.Mediatheque::modifier(path, basepath, to_update, upwd); // Appel de la méthode pour effectuer la modification des valeurs
+                updatelivre.Mediatheque::modifier(path, basepath, to_update, upwd); // Appel de la mï¿½thode pour effectuer la modification des valeurs
                 break;
             }
             case AUTEUR_LIVRE:
@@ -150,7 +150,7 @@ void Livre::menulivre()
                 cout << "Saisir le nouvel auteur : " << endl;
                 cin >> upwd;
 
-                updatelivre.Mediatheque::modifier(path, basepath, to_update, upwd); // Appel de la méthode pour effectuer la modification des valeurs
+                updatelivre.Mediatheque::modifier(path, basepath, to_update, upwd); // Appel de la mï¿½thode pour effectuer la modification des valeurs
                 break;
             }
             case EDITEUR_LIVRE:
@@ -162,7 +162,7 @@ void Livre::menulivre()
                 cout << "Saisir le nouvel editeur : " << endl;
                 cin >> upwd;
 
-                updatelivre.Mediatheque::modifier(path, basepath, to_update, upwd); // Appel de la méthode pour effectuer la modification des valeurs
+                updatelivre.Mediatheque::modifier(path, basepath, to_update, upwd); // Appel de la mï¿½thode pour effectuer la modification des valeurs
                 break;
             }
             case IDENTIFIANT_LIVRE:
@@ -189,7 +189,7 @@ void Livre::menulivre()
                 to_update = to_string(to_update_id);
                 upwd = to_string(update_id);
 
-                updatelivre.Mediatheque::modifier(path, basepath, to_update, upwd); // Appel de la méthode pour effectuer la modification des valeurs
+                updatelivre.Mediatheque::modifier(path, basepath, to_update, upwd); // Appel de la methode pour effectuer la modification des valeurs
                 break;
             }
             case RETOUR_MODIF_LIVRE:
