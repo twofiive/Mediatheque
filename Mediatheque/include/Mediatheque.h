@@ -6,7 +6,7 @@
 #define GESTION_FILM 3
 #define QUITTER 4
 
-/** Declaration des bibilioth�ques */
+/** Declaration des bibliotheques */
 #include <iostream>
 #include <string>
 #include <fstream> /** Pour la gestion de fichiers */
@@ -23,12 +23,12 @@ public:
 
     virtual ~Mediatheque(); /** Destructeur virtuel */
 
-    /// Par contenu je fais r�f�rence au notice
-    virtual void afficher(vector <string> &data); /** M�thode pour afficher du contenu des classes fille */
-    virtual void rechercher(const string &path, vector <string> &data); /** M�thode pour rechercher du contenu dans les classes fille */
-    virtual void supprimer(const string &path, vector <string>  &data); /** M�thode pour supprimer du contenu des classes fille */
-    virtual void ajouter(const string &path, vector <string> &data); /** M�thode pour ajouter du contenu des classes fille */
-    virtual void modifier(const string &path, vector <string> &data); /** M�thode pour modifier le contenu des classes fille */
+  /// Par contenu je fais reference au notice
+    virtual void afficher(vector <string> &data); /** Methode pour afficher du contenu des classes fille */
+    virtual void rechercher( vector <string> &loadedData, vector <string> &data, const string &path); /** Methode pour rechercher du contenu dans les classes fille */
+    virtual void supprimer(const string &path, vector <string>  &data); /** Methode pour supprimer du contenu des classes fille */
+    virtual void ajouter(const string &path, vector <string> &data); /** Methode pour ajouter du contenu des classes fille */
+    virtual void modifier(const string &path, vector <string> &data); /** Methode pour modifier le contenu des classes fille */
     virtual void chargementdata(const string &path,vector <string> &data);
     virtual void enregistrer(const string &path,vector <string> &data)
 

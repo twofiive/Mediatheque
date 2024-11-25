@@ -1,6 +1,6 @@
 #include "Livre.h"
 
-Livre::Livre(){}
+Livre::Livre() {}
 /** Constructeur herite du constructeur de base de la classe mediatheque avec titre et ID et
 ajoute les attributs specifique a la classe interprete et label */
 Livre::Livre(const string &titre, int ID, const string &auteur, const string &editeur) : Mediatheque(titre, ID), auteur(auteur), editeur(editeur) {}
@@ -82,14 +82,30 @@ void Livre::menulivre()
             Livre recherchelivre;
             cout << "============ RECHERCHE LIVRE ============" << endl;
             cout << "Saisir le titre rechercher : ";
-            cin >> titre;
+
+            do
+            {
+                cin.ignore(); // Pour supprimer les entrées précedentes
+                getline(cin, titre);
+            }
+            while ( titre.empty() );
+
             do
             {
                 cout << "Saisir l'ID rechercher : ";
                 cin >> id;
+                if (id < 1000 && id >= 10000)
+                {
+                    cout << "L'ID doit etre un nombre de 4 chiffres entre 1000 et 9999.\n";
+                }
             }
             while ( id < 1000 || id >= 10000 );
-            recherchelivre.Mediatheque::rechercher(path, titre, id);
+            string idstr = to_string(id); // Pour changer le type int en string
+            vector <string> element = {titre, idstr}; // Les éléments sont placés dans un vecteur
+            vector <string> fichier; // Les éléments à m'intérieur du vecteur viennent du fichier
+            fichier.empty();
+            recherchelivre.chargementdata(path, fichier);
+            recherchelivre.rechercher(fichier, element, path);
             break;
         }
         case AFFICHER:
