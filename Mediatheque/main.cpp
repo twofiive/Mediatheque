@@ -1,4 +1,4 @@
-/// Ici on appelle les différentes classes crées
+/// Ici on appelle les diffï¿½rentes classes crï¿½es
 #include "Mediatheque.h" /// La classe parent
 /// Les classes fille
 #include "CD.h"
@@ -26,23 +26,33 @@ int main()
         {
         case GESTION_CD:
         {
-            /// Création d'une classe et appel du menu
+            /// Chargement des donnÃ©es de la collection cd 
+            /// Appel du menu gestion cd
             CD cd;
+            string path = "cd.txt";
+            vector<string> data;
+            cd.chargementdata(path,data);
             cd.menucd();
             break;
         }
         case GESTION_LIVRE:
         {
-            /// Création d'une classe et appel du menu
-            Livre livreA;
-            livreA.menulivre();
+            // Chargement des donnÃ©es de la collection livre 
+            /// Appel du menu gestion livre
+            Livre livre;
+            string path = "livre.txt";
+            livre.chargementdata(path,data);
+            livre.menulivre();
             break;
         }
 
         case GESTION_FILM:
         {
-            /// Création d'une classe et appel du menu
+            // Chargement des donnÃ©es de la collection film
+            /// Appel du menu gestion film
             Film film;
+            string path = "film.txt";
+            livre.chargementdata(path,data);
             film.menufilm();
             break;
         }

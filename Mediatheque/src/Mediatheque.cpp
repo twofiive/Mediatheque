@@ -3,24 +3,34 @@
 #include <iostream>
 #include <fstream>
 
-//Constructeur par défaut de la classe mère
+// Constructeur par défaut de la classe mère
 Mediatheque::Mediatheque() {};
-//Constructeur avec paramètre qui prend en charge les attributs communs au trois classe fille
+// Constructeur avec paramètre qui prend en charge les attributs communs au trois classe fille
 Mediatheque::Mediatheque(const string &titre, int ID) : titre(titre), id(ID) {}
-//Destructeur
+// Destructeur
 Mediatheque::~Mediatheque() {}
 
+void Mediatheque::afficher(const string &path, vector<string> &data)
+{
 
-// Affichage des notice
-void Mediatheque::afficher(const string &path)//Prend en argument le chemin définies dans les macros des classe fille.
+    for (int i = 0; i < data.size(); i++)
+    {
+
+        cout << data[i] << endl;
+    }
+}
+
+// Chargement des notices dans le vecteur
+void Mediatheque::chargementdata(const string &path, vector<string> &data) // Prend en argument le chemin définies dans les macros des classe fille.
 {
     ifstream fichier(path); // ifstream permet de lire un fichier
-    string ligne;// ligne permet de stocker la ligne qui sera lu par getline
-    if (fichier.is_open())// Vérifie si le fichier et bien ouvert
+    string ligne;           // ligne permet de stocker la ligne qui sera lu par getline
+    if (fichier.is_open())  // Vérifie si le fichier et bien ouvert
     {
-        while (getline(fichier, ligne))// getline permet de lire chaque ligne du fichier et de stocker la ligne afin de l'output
+        data.clear();
+        while (getline(fichier, ligne)) // getline permet de lire chaque ligne du fichier et de stocker la ligne afin de l'output
         {
-            cout << ligne << endl;
+            data.emplace_back(ligne);
         }
         fichier.close(); // ferme le fichier après que chaque ligne du fichier est était output
     }
@@ -51,8 +61,7 @@ void Mediatheque::rechercher(vector <string> &loadedData, vector <string> &data,
     }
 }
 
-
-void Mediatheque::supprimer(const string &path, string &basepath, int &id)
+void Mediatheque::supprimer(const string &path, vector<string> &data)
 {
     string path_temp = basepath + "cd_temp.txt";
     string line;
@@ -103,12 +112,12 @@ void Mediatheque::supprimer(const string &path, string &basepath, int &id)
     }
 }
 
-void Mediatheque::ajouter(const string &path, string &data)
+void Mediatheque::ajouter(const string &path, vector<string> &data)
 {
     ofstream fichier(path, ios::app);
     if (fichier.is_open())
     {
-        fichier << data << endl;
+        data.emplace(ligne);
         fichier.close();
     }
     else

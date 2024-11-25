@@ -6,7 +6,7 @@
 #define GESTION_FILM 3
 #define QUITTER 4
 
-/** Declaration des bibiliothèques */
+/** Declaration des bibliotheques */
 #include <iostream>
 #include <string>
 #include <fstream> /** Pour la gestion de fichiers */
@@ -23,13 +23,14 @@ public:
 
     virtual ~Mediatheque(); /** Destructeur virtuel */
 
-    /// Par contenu je fais référence au notice
-    virtual void afficher(const string &path); /** Méthode pour afficher du contenu des classes fille */
-    virtual void rechercher( vector <string> &loadedData, vector <string> &data, const string &path); /** Méthode pour rechercher du contenu dans les classes fille */
-    virtual void supprimer(const string &path, string &basepath, int &id); /** Méthode pour supprimer du contenu des classes fille */
-    virtual void ajouter(const string &path, string &data); /** Méthode pour ajouter du contenu des classes fille */
-    virtual void modifier(const string &path, string &basepath, string &to_update, string &updw); /** Méthode pour modifier le contenu des classes fille */
+  /// Par contenu je fais reference au notice
+    virtual void afficher(vector <string> &data); /** Methode pour afficher du contenu des classes fille */
+    virtual void rechercher( vector <string> &loadedData, vector <string> &data, const string &path); /** Methode pour rechercher du contenu dans les classes fille */
+    virtual void supprimer(const string &path, vector <string>  &data); /** Methode pour supprimer du contenu des classes fille */
+    virtual void ajouter(const string &path, vector <string> &data); /** Methode pour ajouter du contenu des classes fille */
+    virtual void modifier(const string &path, vector <string> &data); /** Methode pour modifier le contenu des classes fille */
     virtual void chargementdata(const string &path,vector <string> &data);
+    virtual void enregistrer(const string &path,vector <string> &data)
 
 protected:
 
