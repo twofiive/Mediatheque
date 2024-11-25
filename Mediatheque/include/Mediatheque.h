@@ -16,6 +16,10 @@ using namespace std;
 
 class Mediatheque
 {
+    
+protected:
+/// Ces attributs sont accesibles par les classes fille
+    static vector<string> data;
 public:
     /** Declaration des constructeurs */
     Mediatheque();
@@ -24,20 +28,14 @@ public:
     virtual ~Mediatheque(); /** Destructeur virtuel */
 
   /// Par contenu je fais reference au notice
-    virtual void afficher(vector <string> &data); /** Methode pour afficher du contenu des classes fille */
-    virtual void rechercher( vector <string> &loadedData, vector <string> &data, const string &path); /** Methode pour rechercher du contenu dans les classes fille */
-    virtual void supprimer(const string &path, vector <string>  &data); /** Methode pour supprimer du contenu des classes fille */
-    virtual void ajouter(const string &path, vector <string> &data); /** Methode pour ajouter du contenu des classes fille */
-    virtual void modifier(const string &path, vector <string> &data); /** Methode pour modifier le contenu des classes fille */
-    virtual void chargementdata(const string &path,vector <string> &data);
-    virtual void enregistrer(const string &path,vector <string> &data)
+    virtual void afficher(); /** Methode pour afficher du contenu des classes fille */
+    virtual void rechercher( vector <string> &loadedData, const string &path); /** Methode pour rechercher du contenu dans les classes fille */
+    virtual void supprimer(); /** Methode pour supprimer du contenu des classes fille */
+    virtual void ajouter(const string notice); /** Methode pour ajouter du contenu des classes fille */
+    virtual void modifier(); /** Methode pour modifier le contenu des classes fille */
+    virtual void chargementdata(const string &path,);
+    virtual void enregistrer(const string &path,)
 
-protected:
-
-    /// Ces attributs sont accesibles par les classes fille
-
-    string titre;
-    int id;
-};
+}
 
 #endif // MEDIATHEQUE_H

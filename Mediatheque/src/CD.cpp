@@ -5,7 +5,7 @@ CD::CD() {};
 /// Surchage du constructeur
 CD::CD(const string &titre, int ID, const string &interprete, const string &label)
     : Mediatheque(titre, ID), interprete(interprete), label(label) {}
-CD::~CD(vector <string> &data)
+CD::~CD()
 {
     data.clear();
 }
@@ -30,8 +30,7 @@ void CD::menucd()
         case AJOUTER:
         {
 
-            vector<string> data;
-            int id;
+            const string notice;
 
             cout << "============ AJOUT NOTICE ============" << endl;
             cout << "Saisir le titre : ";
@@ -46,11 +45,9 @@ void CD::menucd()
                 cin >> id;
             } while (id < 1000 || id >= 10000);
 
-
             CD noticecd(titre, id, interprete, label);
             notice = titre + ";" + to_string(id) + ";" + interprete + ";" + label;
-            data.emplace_back(notice);
-            noticecd.Mediatheque::ajouter(data);
+            noticecd.Mediatheque::ajouter(notice);
             break;
         }
         case SUPPRIMER:
@@ -79,23 +76,21 @@ void CD::menucd()
             CD cd;
             cout << "============ RECHERCHE LIVRE ============" << endl;
             cout << "Saisir le titre rechercher : ";
-
-  //          do
-    //        {
-                cin.ignore(); // Pour supprimer les entrées précedentes
-                getline(cin, titre);
-          /**  }
-            while ( titre.empty() );
-*/
+            // do
+            //        {
+            cin.ignore(); // Pour supprimer les entrées précedentes
+            getline(cin, titre);
+            /**  }
+              while ( titre.empty() );
+  */
             do
             {
                 cout << "Saisir l'ID rechercher : ";
                 cin >> id;
-            }
-            while ( id < 1000 || id >= 10000 );
-            string idstr = to_string(id); // Pour changer le type int en string
-            vector <string> element = {titre, idstr}; // Les éléments sont placés dans un vecteur
-            vector <string> fichier;// Les éléments sont placés dans un vecteur
+            } while (id < 1000 || id >= 10000);
+            string idstr = to_string(id);            // Pour changer le type int en string
+            vector<string> element = {titre, idstr}; // Les éléments sont placés dans un vecteur
+            vector<string> fichier;                  // Les éléments sont placés dans un vecteur
             fichier.empty();
             cd.chargementdata(path, fichier);
             cd.rechercher(fichier, element, path);

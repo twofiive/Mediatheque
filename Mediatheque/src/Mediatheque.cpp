@@ -10,24 +10,23 @@ Mediatheque::Mediatheque(const string &titre, int ID) : titre(titre), id(ID) {}
 // Destructeur
 Mediatheque::~Mediatheque() {}
 
-void Mediatheque::afficher(const string &path, vector<string> &data)
+void Mediatheque::afficher(const string &path, )
 {
 
     for (int i = 0; i < data.size(); i++)
     {
-
         cout << data[i] << endl;
     }
 }
 
 // Chargement des notices dans le vecteur
-void Mediatheque::chargementdata(const string &path, vector<string> &data) // Prend en argument le chemin définies dans les macros des classe fille.
+void Mediatheque::chargementdata(const string &path, ) // Prend en argument le chemin définies dans les macros des classe fille.
 {
     ifstream fichier(path); // ifstream permet de lire un fichier
     string ligne;           // ligne permet de stocker la ligne qui sera lu par getline
     if (fichier.is_open())  // Vérifie si le fichier et bien ouvert
     {
-        data.clear();
+        data.clear();//Assure que le vecteur est vide avant de charger les données.
         while (getline(fichier, ligne)) // getline permet de lire chaque ligne du fichier et de stocker la ligne afin de l'output
         {
             data.emplace_back(ligne);
@@ -36,11 +35,11 @@ void Mediatheque::chargementdata(const string &path, vector<string> &data) // Pr
     }
     else
     {
-        cerr << "Erreur d'ouverture du fichier : " << path << endl;
+        cerr << "Erreur lors du chargement des données : " << path << endl;
     }
 }
 
-void Mediatheque::rechercher(vector <string> &loadedData, vector <string> &data, const string &path) // Les argument passés sont
+void Mediatheque::rechercher(vector <string> &loadedData,const string &path) // Les argument passés sont
 {
     bool wfind = false; // Permet de definir si le mot à été trouvé par défaut sur false
 
@@ -61,7 +60,7 @@ void Mediatheque::rechercher(vector <string> &loadedData, vector <string> &data,
     }
 }
 
-void Mediatheque::supprimer(const string &path, vector<string> &data)
+void Mediatheque::supprimer(const string &path)
 {
     string path_temp = basepath + "cd_temp.txt";
     string line;
@@ -112,18 +111,11 @@ void Mediatheque::supprimer(const string &path, vector<string> &data)
     }
 }
 
-void Mediatheque::ajouter(const string &path, vector<string> &data)
-{
-    ofstream fichier(path, ios::app);
-    if (fichier.is_open())
-    {
-        data.emplace(ligne);
-        fichier.close();
-    }
-    else
-    {
-        cerr << "Erreur d'ouverture du fichier : " << path << endl;
-    }
+void Mediatheque::ajouter(const string notice)
+{ 
+    data.emplace_back(notice);
+
+    
 }
 
 void Mediatheque::modifier(const string &path, string &basepath, string &to_update, string &upwd)
@@ -179,7 +171,7 @@ void Mediatheque::modifier(const string &path, string &basepath, string &to_upda
     }
 }
 
-void Mediatheque::chargementdata(const string &path,vector <string> &data)//Prend en argument le chemin définies dans les macros des classe fille.
+void Mediatheque::chargementdata(const string &path)//Prend en argument le chemin définies dans les macros des classe fille.
 {
     ifstream fichier(path); // ifstream permet de lire un fichier
     string ligne;// ligne permet de stocker la ligne qui sera lu par getline
