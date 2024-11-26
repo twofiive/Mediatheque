@@ -40,6 +40,7 @@ void Mediatheque::chargementdata(const string &path)
     }
     else
     {
+<<<<<<< HEAD
         cerr << "Erreur d'ouverture du fichier : " << path << endl;
     }
 }
@@ -57,10 +58,60 @@ void Mediatheque::enregistrer(const string &path)
         }
         fichier.close();
         cout << "Données enregistrées avec succès dans : " << path << endl;
+=======
+        cerr << "Erreur lors du chargement des données : " << path << endl;
     }
-    else
+}
+
+void Mediatheque::rechercher(vector<string> &loadedData, const string &path) // Les argument passés sont
+{
+    bool wfind = false; // Permet de definir si le mot à été trouvé par défaut sur false
+
+    for (const auto &line : data)
     {
+        if (line.find(loadedData[0]) != string::npos && line.find(loadedData[1]) != string::npos) // Permet de comparer le titre et id passé en
+        {
+            // argument afin de comparer et de rechercher le titre et l'id dans le fichier
+            cout << "Resultat de la recherche : " << endl; // npos est un indicateur de non-correspondance
+            cout << line << endl;
+            wfind = true;
+        }
+    }
+
+    if (!wfind)
+    {
+        cerr << "La notice recherchee n'existe pas dans le fichier : " << path << endl;
+    }
+}
+
+void Mediatheque::supprimer(vector<string> &loadedData, const string &path)
+{
+    int index = -1;
+    int i;
+
+    for (i = 0; i < data.size(); ++i)
+    {
+        if (data[i].find(loadedData[0]) != string::npos && data[i].find(loadedData[1]) != string::npos)//Permet de comparer le titre et id passé en
+        {
+            //argument afin de comparer et de rechercher le titre et l'id dans le fichier
+            cout << "Resultat de la recherche : " << endl;                       //npos est un indicateur de non-correspondance
+            cout << data[i] << endl;
+            cout << i << endl;
+            data.erase(data.begin() + i ); // Removes the element at index 1 (value 2)
+            cout << "Element supprime avec succes." << endl;
+            index = i;
+            break;
+        }
+>>>>>>> 992ce3743511e3832702b9e3f71114dd0796d910
+    }
+
+    if ( index == -1 )
+    {
+<<<<<<< HEAD
         cerr << "Impossible d'enregistrer dans le fichier : " << path << endl;
+=======
+        cerr << "Aucun element supprime." << endl;
+>>>>>>> 992ce3743511e3832702b9e3f71114dd0796d910
     }
 }
 

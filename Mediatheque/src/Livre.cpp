@@ -58,6 +58,7 @@ void Livre::menulivre()
         {
             cout << "Saisir l'identifiant de la notice à supprimer : ";
             int id;
+<<<<<<< HEAD
             cin >> id;
 
             auto it = remove_if(data.begin(), data.end(), [&](const string &ligne)
@@ -72,6 +73,31 @@ void Livre::menulivre()
             {
                 cout << "Notice introuvable !" << endl;
             }
+=======
+            string titre;
+            const string path = CHEMIN_LIVRE;
+            Livre livre;
+            affichecd.Mediatheque::afficher(path);
+            cout << "============ SUPPRESSION LIVRE ============" << endl;
+
+            do
+            {
+                cout << "Saisir le titre rechercher : ";
+                cin.ignore(); // Pour supprimer les entrées précedentes
+                getline(cin, titre);
+            }
+            while ( titre.empty() );
+
+            do
+            {
+                cout << "Saisir l'ID rechercher : ";
+                cin >> id;
+            }
+            while ( id < 1000 || id >= 10000 );
+            string idstr = to_string(id); // Pour changer le type int en string
+            vector <string> element = {titre, idstr}; // Les éléments sont placés dans un vecteur
+            livre.supprimer(element, path); /// Appelle de la m�thode supprimer de la class parent Mediatheque
+>>>>>>> 992ce3743511e3832702b9e3f71114dd0796d910
             break;
         }
 
@@ -79,6 +105,7 @@ void Livre::menulivre()
         {
             cout << "Saisir l'identifiant de la notice à rechercher : ";
             int id;
+<<<<<<< HEAD
             cin >> id;
 
             bool trouve = false;
@@ -96,6 +123,27 @@ void Livre::menulivre()
             {
                 cout << "Notice introuvable !" << endl;
             }
+=======
+            string path;
+            path = CHEMIN_CD;
+            Livre livre;
+            cout << "============ RECHERCHE LIVRE ============" << endl;
+            cout << "Saisir le titre rechercher : ";
+            do
+                    {
+            cin.ignore(); // Pour supprimer les entrées précedentes
+            getline(cin, titre);
+            }
+            while ( titre.empty() );
+            do
+            {
+                cout << "Saisir l'ID rechercher : ";
+                cin >> id;
+            } while (id < 1000 || id >= 10000);
+            string idstr = to_string(id);            // Pour changer le type int en string
+            vector<string> element = {titre, idstr}; // Les éléments sont placés dans un vecteur
+            livre.rechercher(element, path);
+>>>>>>> 992ce3743511e3832702b9e3f71114dd0796d910
             break;
         }
 
