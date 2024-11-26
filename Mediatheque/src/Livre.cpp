@@ -25,6 +25,7 @@ void Livre::menulivre()
         cout << RECHERCHER << " - Rechercher une notice" << endl;
         cout << AFFICHER << " - Afficher toutes les notices" << endl;
         cout << MODIFIER << " - Modifier une notice" << endl;
+        cout << ENREGISTRER << " - Sauvegarder les notices" << endl;
         cout << RETOUR << " - Retour au menu principal" << endl;
         cout << "Votre choix : ";
         cin >> choixlivre;
@@ -101,7 +102,8 @@ void Livre::menulivre()
             {
                 cout << "Saisir l'ID rechercher : ";
                 cin >> id;
-            } while (id < 1000 || id >= 10000);
+            }
+            while (id < 1000 || id >= 10000);
             string idstr = to_string(id);            // Pour changer le type int en string
             vector<string> element = {titre, idstr}; // Les éléments sont placés dans un vecteur
             livre.rechercher(element, path);
@@ -133,9 +135,13 @@ void Livre::menulivre()
             break;
         }
 */
+
+        case ENREGISTRER:
+            enregistrer(CHEMIN_LIVRE);
+            break;
+
         case RETOUR:
             cout << "Retour au menu principal." << endl;
-            data.clear();
             break;
 
         default:

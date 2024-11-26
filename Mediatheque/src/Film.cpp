@@ -26,6 +26,7 @@ void Film::menufilm()
         cout << RECHERCHER << " - Rechercher une notice" << endl;
         cout << AFFICHER << " - Afficher toutes les notices" << endl;
         cout << MODIFIER << " - Modifier une notice" << endl;
+        cout << ENREGISTRER << " - Sauvegarder les notices" << endl;
         cout << RETOUR << " - Retour au menu principal" << endl;
         cout << "Votre choix : ";
         cin >> choixfilm;
@@ -134,6 +135,10 @@ void Film::menufilm()
             break;
         }
 */
+        case ENREGISTRER:
+            enregistrer(CHEMIN_FILM);
+            break;
+
         case RETOUR:
             cout << "Retour au menu principal." << endl;
             data.clear();

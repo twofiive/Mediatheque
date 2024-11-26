@@ -23,7 +23,6 @@ void Mediatheque::afficher(const string &path)
     }
     for (const auto &ligne : data)
     {
-        cout << "debug" << endl;
         cout << ligne << endl;
     }
 }
@@ -117,18 +116,17 @@ void Mediatheque::supprimer(vector<string> &loadedData, const string &path)
             //argument afin de comparer et de rechercher le titre et l'id dans le fichier
             cout << "Resultat de la recherche : " << endl;                       //npos est un indicateur de non-correspondance
             cout << data[i] << endl;
-            data.erase(data.begin() + i ); // Removes the element at index 1 (value 2)
+            data.  erase(data.begin() + i ); // Removes the element at index 1 (value 2)
             cout << "Element supprime avec succes." << endl;
             index = i;
+            break;
+        }
             cout << "Voulez-vous sauvegarder avant de quitter ? (o/n) : ";
             cin >> choix;
             if (choix == 'o' || choix == 'O')
             {
                 Mediatheque::enregistrer(path);
             }
-
-            break;
-        }
     }
 
 

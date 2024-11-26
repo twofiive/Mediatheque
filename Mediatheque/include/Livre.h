@@ -12,7 +12,8 @@ using namespace std;
 #define RECHERCHER 3
 #define AFFICHER 4
 #define MODIFIER 5
-#define RETOUR 6
+#define ENREGISTRER 6
+#define RETOUR 7
 
 // Menu modification des livres
 #define TITRE_LIVRE 10
