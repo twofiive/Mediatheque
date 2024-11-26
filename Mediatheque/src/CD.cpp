@@ -53,19 +53,30 @@ void CD::menucd()
         }
         case SUPPRIMER:
         {
-
+            int id;
+            string titre;
             const string path = CHEMIN_CD;
-            string basepath = "cd/";
             CD affichecd;
             affichecd.Mediatheque::afficher(path);
             cout << "============ SUPPRESSION CD ============" << endl;
+
             do
             {
-                cout << "Saisir l'identifiant de la notice à supprimer (4 nombre) : " << endl;
+                cout << "Saisir le titre rechercher : ";
+                cin.ignore(); // Pour supprimer les entrées précedentes
+                getline(cin, titre);
+            }
+            while ( titre.empty() );
+
+            do
+            {
+                cout << "Saisir l'ID rechercher : ";
                 cin >> id;
-            } while (id < 1000 || id > 10000);
-            CD noticesupp;
-            noticesupp.Mediatheque::supprimer(path, basepath, id);
+            }
+            while ( id < 1000 || id >= 10000 );
+            string idstr = to_string(id); // Pour changer le type int en string
+            vector <string> element = {titre, idstr}; // Les éléments sont placés dans un vecteur
+            affichecd.supprimer(element, path); /// Appelle de la m�thode supprimer de la class parent Mediatheque
             break;
         }
         case RECHERCHER:
@@ -77,13 +88,12 @@ void CD::menucd()
             CD cd;
             cout << "============ RECHERCHE LIVRE ============" << endl;
             cout << "Saisir le titre rechercher : ";
-            // do
-            //        {
+            do
+                    {
             cin.ignore(); // Pour supprimer les entrées précedentes
             getline(cin, titre);
-            /**  }
-              while ( titre.empty() );
-  */
+            }
+            while ( titre.empty() );
             do
             {
                 cout << "Saisir l'ID rechercher : ";
@@ -91,10 +101,7 @@ void CD::menucd()
             } while (id < 1000 || id >= 10000);
             string idstr = to_string(id);            // Pour changer le type int en string
             vector<string> element = {titre, idstr}; // Les éléments sont placés dans un vecteur
-            vector<string> fichier;                  // Les éléments sont placés dans un vecteur
-            fichier.empty();
-            cd.chargementdata(path, fichier);
-            cd.rechercher(fichier, element, path);
+            cd.rechercher(element, path);
             break;
         }
         case AFFICHER:
