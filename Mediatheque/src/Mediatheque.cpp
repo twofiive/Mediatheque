@@ -43,9 +43,9 @@ void Mediatheque::rechercher(vector<string> &loadedData, const string &path) // 
 {
     bool wfind = false; // Permet de definir si le mot à été trouvé par défaut sur false
 
-    for (const auto &line : loadedData)
+    for (const auto &line : data)
     {
-        if (line.find(data[0]) != string::npos && line.find(data[1]) != string::npos) // Permet de comparer le titre et id passé en
+        if (line.find(loadedData[0]) != string::npos && line.find(loadedData[1]) != string::npos) // Permet de comparer le titre et id passé en
         {
             // argument afin de comparer et de rechercher le titre et l'id dans le fichier
             cout << "Resultat de la recherche : " << endl; // npos est un indicateur de non-correspondance
@@ -60,54 +60,29 @@ void Mediatheque::rechercher(vector<string> &loadedData, const string &path) // 
     }
 }
 
-void Mediatheque::supprimer(const string &path)
+void Mediatheque::supprimer(vector<string> &loadedData, const string &path)
 {
-    string path_temp = basepath + "cd_temp.txt";
-    string line;
-    string idtostr = to_string(id);
-    ifstream fichier(path);
-    ofstream fichier_temp(path_temp);
+    int index = -1;
+    int i;
 
-    bool id_trouve = false;
-
-    if (fichier.is_open() && fichier_temp.is_open())
+    for (i = 0; i < data.size(); ++i)
     {
-        while (getline(fichier, line))
+        if (data[i].find(loadedData[0]) != string::npos && data[i].find(loadedData[1]) != string::npos)//Permet de comparer le titre et id passé en
         {
-            if (line.find(idtostr) == string::npos)
-            {
-                fichier_temp << line << endl;
-            }
-            else
-            {
-                cout << "Suppression de la ligne : " << line << endl;
-                id_trouve = true;
-            }
-        }
-
-        fichier.close();
-        fichier_temp.close();
-
-        if (id_trouve)
-        {
-            if (remove(path.c_str()) != 0)
-            {
-                cerr << "Erreur lors de la suppression du fichier original." << endl;
-            }
-            else if (rename(path_temp.c_str(), path.c_str()) != 0)
-            {
-                cerr << "Erreur lors du renommage du fichier temporaire." << endl;
-            }
-        }
-        else
-        {
-            remove(path_temp.c_str());
-            cerr << "L'ID recherché n'a pas été trouvé : " << id << endl;
+            //argument afin de comparer et de rechercher le titre et l'id dans le fichier
+            cout << "Resultat de la recherche : " << endl;                       //npos est un indicateur de non-correspondance
+            cout << data[i] << endl;
+            cout << i << endl;
+            data.erase(data.begin() + i ); // Removes the element at index 1 (value 2)
+            cout << "Element supprime avec succes." << endl;
+            index = i;
+            break;
         }
     }
-    else
+
+    if ( index == -1 )
     {
-        cerr << "Erreur lors de l'ouverture des fichiers." << endl;
+        cerr << "Aucun element supprime." << endl;
     }
 }
 

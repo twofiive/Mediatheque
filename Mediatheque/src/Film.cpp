@@ -57,36 +57,16 @@ void Film::menufilm()
         case SUPPRIMER:
         {
             int id;
-            string path;
-            string basepath;
-            path = "film.txt";
-            basepath = "film/";
-            Film affichefilm;
-            affichefilm.Mediatheque::afficher(path);
-            cout << "============ SUPPRESSION FILM ============" << endl;
-            do
-            {
-                cout << "Saisir l'identifiant de la notice a supprimer (4 chiffres) : " << endl;
-                cin >> id;
-            }
-            while ( id < 1000 || id > 10000 );
-            Film noticesupp;
-            noticesupp.Mediatheque::supprimer(path, basepath, id);
-            break;
-        }
-        case RECHERCHER:
-        {
             string titre;
-            int id;
-            string path;
-            path = CHEMIN_FILM;
+            const string path = CHEMIN_CD;
             Film film;
-            cout << "============ RECHERCHE LIVRE ============" << endl;
-            cout << "Saisir le titre rechercher : ";
+            affichecd.Mediatheque::afficher(path);
+            cout << "============ SUPPRESSION FILM ============" << endl;
 
             do
             {
-                cin.ignore(); // Pour supprimer les entrées précedentes
+                cout << "Saisir le titre rechercher : ";
+                cin.ignore(); // Pour supprimer les entrÃ©es prÃ©cedentes
                 getline(cin, titre);
             }
             while ( titre.empty() );
@@ -95,18 +75,36 @@ void Film::menufilm()
             {
                 cout << "Saisir l'ID rechercher : ";
                 cin >> id;
-                if (id < 1000 && id >= 10000)
-                {
-                    cout << "L'ID doit être un nombre de 4 chiffres entre 1000 et 9999.\n";
-                }
             }
             while ( id < 1000 || id >= 10000 );
             string idstr = to_string(id); // Pour changer le type int en string
-            vector <string> element = {titre, idstr}; // Les éléments sont placés dans un vecteur
-            vector <string> fichier; // Les éléments sont placés dans un vecteur
-            fichier.empty();
-            film.chargementdata(path, fichier);
-            film.rechercher(fichier, element, path);
+            vector <string> element = {titre, idstr}; // Les Ã©lÃ©ments sont placÃ©s dans un vecteur
+            film.supprimer(element, path); /// Appelle de la mï¿½thode supprimer de la class parent Mediatheque
+            break;
+        }
+        case RECHERCHER:
+        {
+            string titre;
+            int id;
+            string path;
+            path = CHEMIN_CD;
+            Film film;
+            cout << "============ RECHERCHE FILM ============" << endl;
+            cout << "Saisir le titre rechercher : ";
+            do
+                    {
+            cin.ignore(); // Pour supprimer les entrÃ©es prÃ©cedentes
+            getline(cin, titre);
+            }
+            while ( titre.empty() );
+            do
+            {
+                cout << "Saisir l'ID rechercher : ";
+                cin >> id;
+            } while (id < 1000 || id >= 10000);
+            string idstr = to_string(id);            // Pour changer le type int en string
+            vector<string> element = {titre, idstr}; // Les Ã©lÃ©ments sont placÃ©s dans un vecteur
+            film.rechercher(element, path);
             break;
         }
         case AFFICHER:
