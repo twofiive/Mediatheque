@@ -43,7 +43,7 @@ int main() {
             break;
         }
         case QUITTER:
-            cout << " À bientôt !" << endl;
+            cout << " A bientot !" << endl;
             exit(0);
         default:
             cerr << "Saisie incorrecte !" << endl;

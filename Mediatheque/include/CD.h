@@ -14,14 +14,10 @@ using namespace std;
 #define ENREGISTRER 6
 #define RETOUR 7
 
-// Menu modification des CDs
-#define TITRE_CD 10
-#define AUTEUR_CD 11
-#define LABEL_CD 12
-#define IDENTIFIANT_CD 13
-#define RETOUR_MODIF_CD 14
 
 #define CHEMINCD "cd.txt"
+
+using namespace std;
 
 class CD : public Mediatheque {
 public:
@@ -36,8 +32,6 @@ protected:
     string interprete; // Interprète d'un CD
     string label;      // Label d'un CD
 
-private:
-    static const string path; // Chemin constant pour le fichier CD
 };
 
 #endif // CD_H

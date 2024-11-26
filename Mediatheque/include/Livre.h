@@ -21,7 +21,7 @@ using namespace std;
 #define IDENTIFIANT_LIVRE 13
 #define RETOUR_MODIF_LIVRE 14
 
-#define CHEMIN_LIVRE "livre.txt"
+#define CHEMIN_LIVRE "livre.txt" // Chemin constant pour le fichier des livres
 
 class Livre : public Mediatheque {
 public:
@@ -36,8 +36,6 @@ protected:
     string auteur;    // Auteur du livre
     string editeur;   // Éditeur du livre
 
-private:
-    static const string path; // Chemin constant pour le fichier des livres
 };
 
 #endif // LIVRE_H

@@ -1,4 +1,5 @@
 #include "Mediatheque.h"
+#include "Film.h"
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -14,10 +15,15 @@ Mediatheque::Mediatheque(const string &titre, int ID) : titre(titre), id(ID) {}
 Mediatheque::~Mediatheque() {}
 
 // Afficher les données dans le vecteur
-void Mediatheque::afficher()
+void Mediatheque::afficher(const string &path)
 {
+    if (data.empty())
+    {
+        Mediatheque::chargementdata(path);
+    }
     for (const auto &ligne : data)
     {
+        cout << "debug" << endl;
         cout << ligne << endl;
     }
 }
@@ -30,17 +36,15 @@ void Mediatheque::chargementdata(const string &path)
 
     if (fichier.is_open())
     {
-        data.clear();
         while (getline(fichier, ligne))
         {
             data.emplace_back(ligne);
         }
         fichier.close();
-        cout << "Données chargées avec succès depuis : " << path << endl;
+        cout << "Donnees chargees avec succes depuis : " << path << endl;
     }
     else
     {
-<<<<<<< HEAD
         cerr << "Erreur d'ouverture du fichier : " << path << endl;
     }
 }
@@ -57,14 +61,23 @@ void Mediatheque::enregistrer(const string &path)
             fichier << ligne << endl;
         }
         fichier.close();
-        cout << "Données enregistrées avec succès dans : " << path << endl;
-=======
-        cerr << "Erreur lors du chargement des données : " << path << endl;
+        cout << "Donnees enregistrees avec succes dans : " << path << endl;
+    }
+    else
+    {
+        cerr << "Impossible d'enregistrer dans le fichier : " << path << endl;
     }
 }
 
 void Mediatheque::rechercher(vector<string> &loadedData, const string &path) // Les argument passés sont
 {
+    if (data.empty())
+    {
+        cout << "Les donnees ne sont pas chargees, rechargement en cours..." << endl;
+        chargementdata(path);
+    }
+
+
     bool wfind = false; // Permet de definir si le mot à été trouvé par défaut sur false
 
     for (const auto &line : data)
@@ -88,6 +101,14 @@ void Mediatheque::supprimer(vector<string> &loadedData, const string &path)
 {
     int index = -1;
     int i;
+    char choix;
+
+    if (data.empty())
+    {
+        cout << "Les donnees ne sont pas chargees, rechargement en cours..." << endl;
+        chargementdata(path);
+    }
+
 
     for (i = 0; i < data.size(); ++i)
     {
@@ -96,22 +117,24 @@ void Mediatheque::supprimer(vector<string> &loadedData, const string &path)
             //argument afin de comparer et de rechercher le titre et l'id dans le fichier
             cout << "Resultat de la recherche : " << endl;                       //npos est un indicateur de non-correspondance
             cout << data[i] << endl;
-            cout << i << endl;
             data.erase(data.begin() + i ); // Removes the element at index 1 (value 2)
             cout << "Element supprime avec succes." << endl;
             index = i;
+            cout << "Voulez-vous sauvegarder avant de quitter ? (o/n) : ";
+            cin >> choix;
+            if (choix == 'o' || choix == 'O')
+            {
+                Mediatheque::enregistrer(path);
+            }
+
             break;
         }
->>>>>>> 992ce3743511e3832702b9e3f71114dd0796d910
     }
+
 
     if ( index == -1 )
     {
-<<<<<<< HEAD
-        cerr << "Impossible d'enregistrer dans le fichier : " << path << endl;
-=======
         cerr << "Aucun element supprime." << endl;
->>>>>>> 992ce3743511e3832702b9e3f71114dd0796d910
     }
 }
 
@@ -119,9 +142,11 @@ void Mediatheque::supprimer(vector<string> &loadedData, const string &path)
 void Mediatheque::ajouter(const string &notice)
 {
     data.emplace_back(notice);
-    cout << "Notice ajoutée : " << notice << endl;
+    cout << "Notice ajoutee : " << notice << endl;
 }
 
+
+/**
 // Modifier un champ spécifique dans une notice
 void Mediatheque::modifier(int &id, int &choix)
 {
@@ -149,7 +174,7 @@ void Mediatheque::modifier(int &id, int &choix)
 
             switch (choix)
             {
-            case TITRE_CD:
+            case TITRE:
             {
                 cout << "Titre actuel : " << champs[0] << endl;
                 cout << "Nouveau titre : ";
@@ -160,7 +185,7 @@ void Mediatheque::modifier(int &id, int &choix)
                     champs[0] = nouveauTitre;
                 break;
             }
-            case AUTEUR_CD:
+            case ARG_A:
             {
                 cout << "Interprète actuel : " << champs[2] << endl;
                 cout << "Nouvel interprète : ";
@@ -171,7 +196,7 @@ void Mediatheque::modifier(int &id, int &choix)
                     champs[2] = nouvelInterprete;
                 break;
             }
-            case LABEL_CD:
+            case ARG_B:
             {
                 cout << "Label actuel : " << champs[3] << endl;
                 cout << "Nouveau label : ";
@@ -198,3 +223,5 @@ void Mediatheque::modifier(int &id, int &choix)
         cout << "Aucune notice trouvée avec l'ID : " << id << endl;
     }
 }
+
+*/

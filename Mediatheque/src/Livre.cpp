@@ -3,7 +3,7 @@
 #include <sstream>
 #include <algorithm>
 
-const string Livre::path = CHEMIN_LIVRE;
+const string path = CHEMIN_LIVRE;
 
 // Constructeurs
 Livre::Livre() {}
@@ -33,14 +33,16 @@ void Livre::menulivre()
         {
         case AJOUTER:
         {
-            string titre, auteur, editeur;
+            string titre;
+            string auteur;
+            string editeur;
             int id;
 
             cout << "Saisir le titre : ";
             cin >> titre;
             cout << "Saisir l'auteur : ";
             cin >> auteur;
-            cout << "Saisir l'éditeur : ";
+            cout << "Saisir l'editeur : ";
             cin >> editeur;
 
             do
@@ -56,28 +58,10 @@ void Livre::menulivre()
 
         case SUPPRIMER:
         {
-            cout << "Saisir l'identifiant de la notice à supprimer : ";
             int id;
-<<<<<<< HEAD
-            cin >> id;
-
-            auto it = remove_if(data.begin(), data.end(), [&](const string &ligne)
-                                { return ligne.find(to_string(id)) != string::npos; });
-
-            if (it != data.end())
-            {
-                data.erase(it, data.end());
-                cout << "Notice supprimée avec succès !" << endl;
-            }
-            else
-            {
-                cout << "Notice introuvable !" << endl;
-            }
-=======
             string titre;
-            const string path = CHEMIN_LIVRE;
             Livre livre;
-            affichecd.Mediatheque::afficher(path);
+            livre.afficher(path);
             cout << "============ SUPPRESSION LIVRE ============" << endl;
 
             do
@@ -97,35 +81,13 @@ void Livre::menulivre()
             string idstr = to_string(id); // Pour changer le type int en string
             vector <string> element = {titre, idstr}; // Les éléments sont placés dans un vecteur
             livre.supprimer(element, path); /// Appelle de la m�thode supprimer de la class parent Mediatheque
->>>>>>> 992ce3743511e3832702b9e3f71114dd0796d910
             break;
         }
 
         case RECHERCHER:
         {
-            cout << "Saisir l'identifiant de la notice à rechercher : ";
             int id;
-<<<<<<< HEAD
-            cin >> id;
 
-            bool trouve = false;
-            for (const auto &ligne : data)
-            {
-                if (ligne.find(to_string(id)) != string::npos)
-                {
-                    cout << "Notice trouvée : " << ligne << endl;
-                    trouve = true;
-                    break;
-                }
-            }
-
-            if (!trouve)
-            {
-                cout << "Notice introuvable !" << endl;
-            }
-=======
-            string path;
-            path = CHEMIN_CD;
             Livre livre;
             cout << "============ RECHERCHE LIVRE ============" << endl;
             cout << "Saisir le titre rechercher : ";
@@ -143,32 +105,34 @@ void Livre::menulivre()
             string idstr = to_string(id);            // Pour changer le type int en string
             vector<string> element = {titre, idstr}; // Les éléments sont placés dans un vecteur
             livre.rechercher(element, path);
->>>>>>> 992ce3743511e3832702b9e3f71114dd0796d910
             break;
         }
 
         case AFFICHER:
-            afficher(); // Appelle la méthode de la classe mère
+            afficher(path); // Appelle la méthode de la classe mère
             break;
 
+/**
         case MODIFIER:
         {
-            cout << "Saisir l'identifiant de la notice à modifier : ";
             int id;
+
+            cout << "Saisir l'identifiant de la notice à modifier : ";
             cin >> id;
 
             cout << "============ MODIFIER CHAMP ===========" << endl;
-            cout << TITRE_LIVRE << " - Modifier le titre" << endl;
-            cout << AUTEUR_LIVRE << " - Modifier l'auteur" << endl;
-            cout << EDITEUR_LIVRE << " - Modifier l'éditeur" << endl;
+            cout << TITRE << " - Modifier le titre" << endl;
+            cout << IDENTIFIANT << " - Modifier l'id" << endl;
+            cout << AUTEUR << " - Modifier l'auteur" << endl;
+            cout << EDITEUR << " - Modifier l'éditeur" << endl;
             cout << "Votre choix : ";
             int choix;
             cin >> choix;
 
-            modifierChamp(id, choix); // Utilise la méthode de la classe mère
+            modifier(id, choix); // Utilise la méthode de la classe mère
             break;
         }
-
+*/
         case RETOUR:
             cout << "Retour au menu principal." << endl;
             data.clear();

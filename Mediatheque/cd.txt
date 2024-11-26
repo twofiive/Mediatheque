@@ -1,2 +1,0 @@
-Titre;ID;Interprete;Label
-JEAN;7845;FRANCE;UNIVERSAL
