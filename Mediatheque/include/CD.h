@@ -5,7 +5,9 @@
 #define RECHERCHER 3
 #define AFFICHER 4
 #define MODIFIER 5
-#define RETOUR 6
+#define ENREGISTRER 6;
+#define RETOUR 7
+#define PATHCD "cd.txt"
 
 
 /// Declaration des MACROS pour le menu de modification

@@ -21,6 +21,7 @@ void CD::menucd()
         cout << RECHERCHER << " - Rechercher des notices " << endl;
         cout << AFFICHER << " - Afficher une notice " << endl;
         cout << MODIFIER << " - Modifier une notice" << endl;
+        cout << ENREGISTRER << " - Sauvegarde des notices" << endl;
         cout << RETOUR << " - Retour menu principal" << endl;
         cout << "Saisie : " << endl;
         cin >> choixcd;
@@ -197,6 +198,11 @@ void CD::menucd()
                 cerr << "Option invalide." << endl;
                 break;
             }
+        }
+        case ENREGISTRER:
+        {
+            CD cd;
+            cd.enregistrer(PATHCD);
         }
         case RETOUR:
         {

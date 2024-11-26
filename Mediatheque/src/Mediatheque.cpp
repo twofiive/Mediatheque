@@ -26,7 +26,7 @@ void Mediatheque::chargementdata(const string &path, ) // Prend en argument le c
     string ligne;           // ligne permet de stocker la ligne qui sera lu par getline
     if (fichier.is_open())  // Vérifie si le fichier et bien ouvert
     {
-        data.clear();//Assure que le vecteur est vide avant de charger les données.
+        data.clear();                   // Assure que le vecteur est vide avant de charger les données.
         while (getline(fichier, ligne)) // getline permet de lire chaque ligne du fichier et de stocker la ligne afin de l'output
         {
             data.emplace_back(ligne);
@@ -39,16 +39,16 @@ void Mediatheque::chargementdata(const string &path, ) // Prend en argument le c
     }
 }
 
-void Mediatheque::rechercher(vector <string> &loadedData,const string &path) // Les argument passés sont
+void Mediatheque::rechercher(vector<string> &loadedData, const string &path) // Les argument passés sont
 {
     bool wfind = false; // Permet de definir si le mot à été trouvé par défaut sur false
 
     for (const auto &line : loadedData)
     {
-        if (line.find(data[0]) != string::npos && line.find(data[1]) != string::npos)//Permet de comparer le titre et id passé en
+        if (line.find(data[0]) != string::npos && line.find(data[1]) != string::npos) // Permet de comparer le titre et id passé en
         {
-            //argument afin de comparer et de rechercher le titre et l'id dans le fichier
-            cout << "Resultat de la recherche : " << endl;                       //npos est un indicateur de non-correspondance
+            // argument afin de comparer et de rechercher le titre et l'id dans le fichier
+            cout << "Resultat de la recherche : " << endl; // npos est un indicateur de non-correspondance
             cout << line << endl;
             wfind = true;
         }
@@ -112,10 +112,8 @@ void Mediatheque::supprimer(const string &path)
 }
 
 void Mediatheque::ajouter(const string notice)
-{ 
+{
     data.emplace_back(notice);
-
-    
 }
 
 void Mediatheque::modifier(const string &path, string &basepath, string &to_update, string &upwd)
@@ -171,14 +169,14 @@ void Mediatheque::modifier(const string &path, string &basepath, string &to_upda
     }
 }
 
-void Mediatheque::chargementdata(const string &path)//Prend en argument le chemin définies dans les macros des classe fille.
+void Mediatheque::chargementdata(const string &path) // Prend en argument le chemin définies dans les macros des classe fille.
 {
     ifstream fichier(path); // ifstream permet de lire un fichier
-    string ligne;// ligne permet de stocker la ligne qui sera lu par getline
-    if (fichier.is_open())// Vérifie si le fichier et bien ouvert
+    string ligne;           // ligne permet de stocker la ligne qui sera lu par getline
+    if (fichier.is_open())  // Vérifie si le fichier et bien ouvert
     {
         data.clear();
-        while (getline(fichier, ligne))// getline permet de lire chaque ligne du fichier et de stocker la ligne afin de l'output
+        while (getline(fichier, ligne)) // getline permet de lire chaque ligne du fichier et de stocker la ligne afin de l'output
         {
             data.emplace_back(ligne);
         }
@@ -187,5 +185,26 @@ void Mediatheque::chargementdata(const string &path)//Prend en argument le chemi
     else
     {
         cerr << "Erreur d'ouverture du fichier : " << path << endl;
+    }
+}
+
+void Mediatheque::enregistrer(const string &path)
+{
+    string line;
+    ofstream fichier(path, ios::trunc);
+
+    if (fichier.is_open())
+    {
+        for (int i = 0; i < data.size(); i++)
+        {
+            fichier << data[i];
+        }
+        fichier.close();
+        cout << "Données enregistrées avec succès dans : " << path << endl;
+        chargementdata(path);
+    }
+    else
+    {
+        cerr << "Impossible d'enregistrer !" << endl;
     }
 }
