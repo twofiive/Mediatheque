@@ -14,7 +14,7 @@ Film::~Film()
     data.clear();
 }
 
-/** Menu spécifique à la gestion des films */ 
+/** Menu spécifique à la gestion des films */
 void Film::menufilm()
 {
     int choixfilm;
@@ -103,6 +103,7 @@ void Film::menufilm()
             string idstr = to_string(id); // Pour changer le type int en string
             vector <string> element = {titre, idstr}; // Les éléments sont placés dans un vecteur
             film.supprimer(element, path); /// Appelle de la methode supprimer de la class parent Mediatheque
+            choixcd = 7;
             break;
         }
 
@@ -159,6 +160,7 @@ void Film::menufilm()
             cin >> choix;
 
             modifier(id, choix); // Utilise la méthode de la classe mère
+            choixcd = 7;
             break;
         }
 

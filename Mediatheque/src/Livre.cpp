@@ -104,6 +104,7 @@ void Livre::menulivre()
             string idstr = to_string(id); // Pour changer le type int en string
             vector <string> element = {titre, idstr}; // Les éléments sont placés dans un vecteur
             livre.supprimer(element, path); /// Appelle de la methode supprimer de la class parent Mediatheque
+            choixcd = 7;
             break;
         }
         /** Recherche une notice */
@@ -153,6 +154,7 @@ void Livre::menulivre()
             cin >> choix;
 
             modifier(id, choix); // Utilise la méthode de la classe mère
+            choixcd = 7;
             break;
         }
 

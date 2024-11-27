@@ -1,4 +1,4 @@
-#include "Mediatheque.h" // Classe parent
+#include "Mediatheque.h" // Classe parent : Mediatheque
 #include "CD.h"          // Classe fille : CD
 #include "Film.h"        // Classe fille : Film
 #include "Livre.h"       // Classe fille : Livre

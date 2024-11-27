@@ -101,6 +101,7 @@ void CD::menucd()
             string idstr = to_string(id); // Pour changer le type int en string
             vector <string> element = {titre, idstr}; // Les éléments sont placés dans un vecteur
             affichecd.supprimer(element, path); /// Appelle de la m�thode supprimer de la class parent Mediatheque
+            choixcd = 7;
             break;
         }
         case RECHERCHER:
@@ -139,13 +140,14 @@ void CD::menucd()
 
             cout << "============ MODIFIER CHAMP ===========" << endl;
             cout << TITRE << " - Modifier le titre" << endl;
-            cout << ARG_A << " - Modifier l'interprète" << endl;
+            cout << ARG_A << " - Modifier l'interprete" << endl;
             cout << ARG_B << " - Modifier le label" << endl;
             cout << "Votre choix : ";
             int choix;
             cin >> choix;
 
             modifier(id, choix);
+            choixcd = 7;
             break;
         }
 
