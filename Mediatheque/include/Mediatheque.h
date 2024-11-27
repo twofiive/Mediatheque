@@ -19,9 +19,14 @@
 #define ARG_B 12
 #define RETOUR_MODIF 14
 
+// Borne de ID
+#define BORNE_HAUTE 10000
+#define BORNE_BASSE 1000
+
 using namespace std;
 
-class Mediatheque {
+class Mediatheque
+{
 protected:
     string titre;          // Titre de la médiathèque
     int id;                // Identifiant de la médiathèque

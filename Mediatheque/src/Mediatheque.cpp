@@ -1,5 +1,4 @@
 #include "Mediatheque.h"
-#include "Film.h"
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -14,12 +13,12 @@ Mediatheque::Mediatheque(const string &titre, int ID) : titre(titre), id(ID) {}
 // Destructeur
 Mediatheque::~Mediatheque() {}
 
-// Afficher les données dans le vecteur
+/** Afficher les données dans le vecteur */
 void Mediatheque::afficher(const string &path)
 {
-    if (data.empty())
+    if (data.empty())  // Vérifie si les données ont déjà été chargées
     {
-        Mediatheque::chargementdata(path);
+        Mediatheque::chargementdata(path); // Si le vecteur est vide, appelle la méthode pour charger les données
     }
     for (const auto &ligne : data)
     {
@@ -27,19 +26,19 @@ void Mediatheque::afficher(const string &path)
     }
 }
 
-// Chargement des données depuis un fichier
+/** Chargement des données depuis un fichier */
 void Mediatheque::chargementdata(const string &path)
 {
     ifstream fichier(path);
     string ligne;
 
-    if (fichier.is_open())
+    if (fichier.is_open()) // Ouverture du fichier
     {
-        while (getline(fichier, ligne))
+        while (getline(fichier, ligne)) // Parcours le fichier ligne par ligne
         {
-            data.emplace_back(ligne);
+            data.emplace_back(ligne); // Introduis chaque ligne dans le vecteur
         }
-        fichier.close();
+        fichier.close(); // Fermeture du fichier
         cout << "Donnees chargees avec succes depuis : " << path << endl;
     }
     else
@@ -48,10 +47,10 @@ void Mediatheque::chargementdata(const string &path)
     }
 }
 
-// Enregistrer les données dans un fichier
+/** Enregistrer les données dans un fichier */
 void Mediatheque::enregistrer(const string &path)
 {
-    ofstream fichier(path, ios::trunc);
+    ofstream fichier(path, ios::trunc); // TODO
 
     if (fichier.is_open())
     {
@@ -68,7 +67,8 @@ void Mediatheque::enregistrer(const string &path)
     }
 }
 
-void Mediatheque::rechercher(vector<string> &loadedData, const string &path) // Les argument passés sont
+/** Rechercher les données dans le fichier  */
+void Mediatheque::rechercher(vector<string> &loadedData, const string &path) // Les argument passés font références aux attibuts(Titre, ID)
 {
     if (data.empty())
     {
@@ -81,12 +81,14 @@ void Mediatheque::rechercher(vector<string> &loadedData, const string &path) // 
 
     for (const auto &line : data)
     {
-        if (line.find(loadedData[0]) != string::npos && line.find(loadedData[1]) != string::npos) // Permet de comparer le titre et id passé en
+        /** Permet de comparer le titre et id passé en argument afin de comparer et
+            de rechercher le titre et l'id dans le fichier
+            npos est un indicateur de non-correspondance */
+        if (line.find(loadedData[0]) != string::npos && line.find(loadedData[1]) != string::npos)
         {
-            // argument afin de comparer et de rechercher le titre et l'id dans le fichier
-            cout << "Resultat de la recherche : " << endl; // npos est un indicateur de non-correspondance
+            cout << "Resultat de la recherche : " << endl;
             cout << line << endl;
-            wfind = true;
+            wfind = true; // En cas de correspondance wfind passe à true
         }
     }
 
@@ -96,6 +98,7 @@ void Mediatheque::rechercher(vector<string> &loadedData, const string &path) // 
     }
 }
 
+/** Supprimer des données dans le fichier */
 void Mediatheque::supprimer(vector<string> &loadedData, const string &path)
 {
     int index = -1;
@@ -111,27 +114,24 @@ void Mediatheque::supprimer(vector<string> &loadedData, const string &path)
 
     for (i = 0; i < data.size(); ++i)
     {
-        if (data[i].find(loadedData[0]) != string::npos && data[i].find(loadedData[1]) != string::npos)//Permet de comparer le titre et id passé en
+        /** Les itérateurs sont utilisés ici pour connaitre l'index de la valeur correspondante et par la suite l'a supprimé */
+        if (data[i].find(loadedData[0]) != string::npos && data[i].find(loadedData[1]) != string::npos)
         {
-            //argument afin de comparer et de rechercher le titre et l'id dans le fichier
-            cout << "Resultat de la recherche : " << endl;                       //npos est un indicateur de non-correspondance
+            cout << "Resultat de la recherche : " << endl;
             cout << data[i] << endl;
             data.erase(data.begin() + i ); // Removes the element at index 1 (value 2)
             cout << "Element supprime avec succes." << endl;
             index = i;
+
+            /** Donne la possibilité à l'utilisateur de sauvegarder
+            directement la modification éffectués dans le fichier  */
             cout << "Voulez-vous sauvegarder avant de quitter ? (o/n) : ";
             cin >> choix;
             if (choix == 'o' || choix == 'O')
             {
                 Mediatheque::enregistrer(path);
             }
-
-/**            cout << "Contenu actuel de data apres suppression : " << endl;
-            for (const auto &ligne : data)
-            {
-                cout << ligne << endl;
-            }
-*/          break;
+            break;
         }
     }
 
@@ -142,17 +142,18 @@ void Mediatheque::supprimer(vector<string> &loadedData, const string &path)
     }
 }
 
-// Ajouter une nouvelle notice
+/** Ajouter une nouvelle notice  */
 void Mediatheque::ajouter(const string &notice)
 {
-    data.emplace_back(notice);
+    data.emplace_back(notice); // Ajout de la notice dans le vecteur
     cout << "Notice ajoutee : " << notice << endl;
     cout << "N'oubliez pas de sauvegarder ;)" << endl;
 }
 
 
 
-// Modifier un champ spécifique dans une notice
+/** Modifier un champ spécifique dans une notice */
+// TODO
 void Mediatheque::modifier(int &id, int &choix)
 {
     bool trouve = false;
