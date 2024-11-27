@@ -37,7 +37,7 @@ void Livre::menulivre()
         /** Ajout de notice  */
         case AJOUTER:
         {
-            // Les attribts de film
+            // Les attributs de la classe Livre
             string titre;
             string auteur;
             string editeur;
@@ -156,7 +156,7 @@ void Livre::menulivre()
             break;
         }
 
-
+        /** Enregistrer les données */
         case ENREGISTRER:
             enregistrer(CHEMIN_LIVRE);
             break;

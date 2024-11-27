@@ -14,7 +14,7 @@ Film::~Film()
     data.clear();
 }
 
-// Menu spécifique à la gestion des films
+/** Menu spécifique à la gestion des films */ 
 void Film::menufilm()
 {
     int choixfilm;
@@ -33,18 +33,21 @@ void Film::menufilm()
 
         switch (choixfilm)
         {
+        /** Ajout de notice  */
         case AJOUTER:
         {
+            // Les attributs de la classe Film
             string titre;
             string producteur;
             string realisateur;
             int id;
 
+            /** Blindage des entrées */
             do
             {
                 cout << "Saisir le titre : ";
                 cin.ignore(); // Pour supprimer les entrées précedentes
-                getline(cin, titre);
+                getline(cin, titre); // Prends en compte l'espace dans une phrase
             }
             while ( titre.empty() );
             do
@@ -67,19 +70,20 @@ void Film::menufilm()
                 cout << "Saisir l'identifiant (4 chiffres) : ";
                 cin >> id;
             }
-            while (id < 1000 || id >= 10000);
+            while (id < BORNE_BASSE || id >= BORNE_HAUTE );
 
-            string notice = titre + ";" + to_string(id) + ";" + producteur + ";" + realisateur;
+            string notice = titre + ";" + to_string(id) + ";" + producteur + ";" + realisateur; // Formattage de la notice
             ajouter(notice); // Appelle la méthode de la classe mère
             break;
         }
 
+        /** Suppression de notice */
         case SUPPRIMER:
         {
             int id;
             string titre;
             Film film;
-            film.afficher(path);
+            film.afficher(path); // Affichage pour permettre à l'utilisateur d'identifier la notice à supprimer
             cout << "============ SUPPRESSION FILM ============" << endl;
 
             do
@@ -95,13 +99,14 @@ void Film::menufilm()
                 cout << "Saisir l'ID rechercher : ";
                 cin >> id;
             }
-            while ( id < 1000 || id >= 10000 );
+            while ( id < BORNE_BASSE || id >= BORNE_HAUTE );
             string idstr = to_string(id); // Pour changer le type int en string
             vector <string> element = {titre, idstr}; // Les éléments sont placés dans un vecteur
-            film.supprimer(element, path); /// Appelle de la m�thode supprimer de la class parent Mediatheque
+            film.supprimer(element, path); /// Appelle de la methode supprimer de la class parent Mediatheque
             break;
         }
 
+        /** Recherche une notice */
         case RECHERCHER:
         {
             int id;
@@ -119,24 +124,31 @@ void Film::menufilm()
                 cout << "Saisir l'ID rechercher : ";
                 cin >> id;
             }
-            while (id < 1000 || id >= 10000);
+            while (id < BORNE_BASSE || id >= BORNE_HAUTE );
             string idstr = to_string(id);            // Pour changer le type int en string
             vector<string> element = {titre, idstr}; // Les éléments sont placés dans un vecteur
             film.rechercher(element, path);
             break;
         }
 
+        /** Affichage de notice */
         case AFFICHER:
             afficher(path); // Appelle la méthode de la classe mère
             break;
 
-
+        /** Modification de notice */
         case MODIFIER:
         {
             int id;
 
-            cout << "Saisir l'identifiant de la notice a modifier : ";
-            cin >> id;
+
+            do
+            {
+                cout << "Saisir l'identifiant de la notice a modifier : ";
+                cin >> id;
+            }
+            while (id < BORNE_BASSE || id >= BORNE_HAUTE );
+
 
             cout << "============ MODIFIER CHAMP ===========" << endl;
             cout << TITRE << " - Modifier le titre" << endl;
@@ -150,6 +162,7 @@ void Film::menufilm()
             break;
         }
 
+        /** Enregistrer les données */
         case ENREGISTRER:
             enregistrer(CHEMIN_FILM);
             break;

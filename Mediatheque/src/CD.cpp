@@ -68,7 +68,7 @@ void CD::menucd()
                 cout << "Saisir l'identifiant (4 chiffres) : ";
                 cin >> id;
             }
-            while (id < 1000 || id >= 10000);
+            while (id < BORNE_BASSE || id >= BORNE_HAUTE );
 
             cout << "N'oubliez pas de sauvegarder votre notice ;)" << endl;
 
@@ -97,7 +97,7 @@ void CD::menucd()
                 cout << "Saisir l'ID rechercher ( 4 chiffres ): ";
                 cin >> id;
             }
-            while ( id < 1000 || id >= 10000 );
+            while (id < BORNE_BASSE || id >= BORNE_HAUTE );
             string idstr = to_string(id); // Pour changer le type int en string
             vector <string> element = {titre, idstr}; // Les éléments sont placés dans un vecteur
             affichecd.supprimer(element, path); /// Appelle de la m�thode supprimer de la class parent Mediatheque
@@ -120,7 +120,7 @@ void CD::menucd()
                 cout << "Saisir l'ID rechercher ( 4 chiffres  ) : ";
                 cin >> id;
             }
-            while (id < 1000 || id >= 10000);
+            while (id < BORNE_BASSE || id >= BORNE_HAUTE);
             string idstr = to_string(id);            // Pour changer le type int en string
             vector<string> element = {titre, idstr}; // Les éléments sont placés dans un vecteur
             cd.rechercher(element, path);
