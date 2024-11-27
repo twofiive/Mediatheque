@@ -1,47 +1,37 @@
 #ifndef CD_H
 #define CD_H
-#define AJOUTER 1
-#define SUPPRIMER 2
-#define RECHERCHER 3
-#define AFFICHER 4
-#define MODIFIER 5
-#define RETOUR 6
-
-
-/// Declaration des MACROS pour le menu de modification
-#define TITRE_CD 10
-#define AUTEUR_CD 11
-#define LABEL_CD 12
-#define IDENTIFIANT_CD 13
-#define RETOUR_MODIF_CD 14
-#define CHEMIN_CD "cd.txt"
 
 #include "Mediatheque.h"
 
 using namespace std;
 
-class CD : public Mediatheque
-{
+// Menu gestion des CDs
+#define AJOUTER 1
+#define SUPPRIMER 2
+#define RECHERCHER 3
+#define AFFICHER 4
+#define MODIFIER 5
+#define ENREGISTRER 6
+#define RETOUR 7
+
+
+#define CHEMINCD "cd.txt"
+
+using namespace std;
+
+class CD : public Mediatheque {
 public:
+    // Constructeurs
     CD();
     CD(const string &titre, int ID, const string &interprete, const string &label);
     ~CD();
 
-    void menucd();
-    void ajouter();
-    void supprimer();
-    void rechercher();
-    void afficher();
-    void modifier();
+    void menucd(); // Menu spécifique à la gestion des CDs
 
 protected:
-    /// Declaration des attributs
-    string interprete;
-    string label;
-    string data;
+    string interprete; // Interprète d'un CD
+    string label;      // Label d'un CD
 
-private:
-    const string path;
 };
 
-#endif
+#endif // CD_H

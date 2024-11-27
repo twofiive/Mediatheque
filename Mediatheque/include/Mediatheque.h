@@ -1,40 +1,47 @@
 #ifndef MEDIATHEQUE_H
 #define MEDIATHEQUE_H
-/** Declaration des choix pour le menu principal */
+
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <vector>
+
+
+// Menu principal
 #define GESTION_CD 1
 #define GESTION_LIVRE 2
 #define GESTION_FILM 3
 #define QUITTER 4
 
-/** Declaration des bibiliothËques */
-#include <iostream>
-#include <string>
-#include <fstream> /** Pour la gestion de fichiers */
+// Menu modification des CDs
+#define TITRE 10
+#define ARG_A 11
+#define ARG_B 12
+#define RETOUR_MODIF 14
 
 using namespace std;
 
-class Mediatheque
-{
+class Mediatheque {
+protected:
+    string titre;          // Titre de la m√©diath√®que
+    int id;                // Identifiant de la m√©diath√®que
+    vector<string> data;   // Vecteur pour stocker les donn√©es
+
 public:
-    /** Declaration des constructeurs */
+    // Constructeurs
     Mediatheque();
     Mediatheque(const string &titre, int ID);
+    ~Mediatheque();
 
-    virtual ~Mediatheque(); /** Destructeur virtuel */
-
-    /// Par contenu je fais rÈfÈrence au notice
-    virtual void afficher(const string &path); /** MÈthode pour afficher du contenu des classes fille */
-    virtual void rechercher(const string &path, string &titre, int &id); /** MÈthode pour rechercher du contenu dans les classes fille */
-    virtual void supprimer(const string &path, string &basepath, int &id); /** MÈthode pour supprimer du contenu des classes fille */
-    virtual void ajouter(const string &path, string &data); /** MÈthode pour ajouter du contenu des classes fille */
-    virtual void modifier(const string &path, string &basepath, string &to_update, string &updw); /** MÈthode pour modifier le contenu des classes fille */
-
-protected:
-
-    /// Ces attributs sont accesibles par les classes fille
-
-    string titre;
-    int id;
+    // M√©thodes virtuelles
+    virtual void afficher(const string &path);                               // Afficher les donn√©es
+    virtual void rechercher(vector<string> &loadedData, const string &path); /** Rechercher une notice */
+    virtual void supprimer(vector<string> &loadedData, const string &path);  /** Supprimer une notice */
+    virtual void ajouter(const string &notice);            // Ajouter une notice
+    virtual void modifier(int &choix, int &id);            // Modifier une notice
+    virtual void chargementdata(const string &chemin);     // Charger les donn√©es depuis un fichier
+    virtual void enregistrer(const string &chemin);        // Enregistrer les donn√©es dans un fichier
 };
+
 
 #endif // MEDIATHEQUE_H

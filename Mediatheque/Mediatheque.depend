@@ -1,38 +1,52 @@
 # depslib dependency file v1.0
-1732347238 source:c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\main.cpp
+1732702494 source:c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\main.cpp
 	"Mediatheque.h"
 	"CD.h"
 	"Film.h"
 	"Livre.h"
+	<iostream>
+	<string>
 
-1732346611 c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\include\mediatheque.h
+1732705067 c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\include\mediatheque.h
 	<iostream>
 	<string>
 	<fstream>
+	<vector>
 
-1732242926 c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\include\cd.h
+1732702494 c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\include\cd.h
 	"Mediatheque.h"
 
-1732311789 source:c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\src\cd.cpp
+1732708059 source:c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\src\cd.cpp
 	"CD.h"
 	<iostream>
+	<algorithm>
+	<string>
 
-1732241969 source:c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\src\mediatheque.cpp
+1732708556 source:c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\src\mediatheque.cpp
 	"Mediatheque.h"
+	"Film.h"
 	<string>
 	<iostream>
 	<fstream>
+	<sstream>
 
-1732311434 source:c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\src\film.cpp
+1732707975 source:c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\src\film.cpp
 	"Film.h"
+	<iostream>
+	<sstream>
+	<algorithm>
 
-1732244694 c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\include\film.h
-	<Mediatheque.h>
-	<string.h>
+1732702604 c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\include\film.h
+	"Mediatheque.h"
+	<string>
 
-1732366564 source:c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\src\livre.cpp
+1732707831 source:c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\src\livre.cpp
 	"Livre.h"
+	<iostream>
+	<sstream>
+	<algorithm>
 
-1732349712 c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\include\livre.h
-	<Mediatheque.h>
+1732702604 c:\users\ryang\documents\ryan\cours\cpp\projet\mediatheque\include\livre.h
+	"Mediatheque.h"
+	<string>
 

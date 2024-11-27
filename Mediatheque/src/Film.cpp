@@ -1,212 +1,166 @@
 #include "Film.h"
+#include <iostream>
+#include <sstream>
+#include <algorithm>
 
+const string path = CHEMIN_FILM;
+
+// Constructeurs
 Film::Film() {}
-
 Film::Film(const string &titre, int ID, const string &producteur, const string &realisateur)
     : Mediatheque(titre, ID), producteur(producteur), realisateur(realisateur) {}
+Film::~Film()
+{
+    data.clear();
+}
 
-Film::~Film() {}
-
+// Menu spécifique à la gestion des films
 void Film::menufilm()
 {
     int choixfilm;
     do
     {
         cout << "============ MENU FILM ============" << endl;
-        cout << AJOUTER << " - Ajout d'une notice " << endl;
-        cout << SUPPRIMER << " - Supprimer des notices " << endl;
-        cout << RECHERCHER << " - Rechercher des notices " << endl;
-        cout << AFFICHER << " - Afficher une notice " << endl;
+        cout << AJOUTER << " - Ajouter une notice" << endl;
+        cout << SUPPRIMER << " - Supprimer une notice" << endl;
+        cout << RECHERCHER << " - Rechercher une notice" << endl;
+        cout << AFFICHER << " - Afficher toutes les notices" << endl;
         cout << MODIFIER << " - Modifier une notice" << endl;
-        cout << RETOUR << " - Retour menu principal" << endl;
-        cout << "Saisie : ";
+        cout << ENREGISTRER << " - Sauvegarder les notices" << endl;
+        cout << RETOUR << " - Retour au menu principal" << endl;
+        cout << "Votre choix : ";
         cin >> choixfilm;
 
         switch (choixfilm)
         {
         case AJOUTER:
         {
-            string titre, producteur, realisateur, data, input, entete;
+            string titre;
+            string producteur;
+            string realisateur;
             int id;
 
-            cout << "============ AJOUT NOTICE ============" << endl;
-            cout << "Saisir le titre : ";
-            cin >> titre;
-            cout << "Saisir le producteur : ";
-            cin >> producteur;
-            cout << "Saisir le realisateur : ";
-            cin >> realisateur;
             do
             {
-                cout << "Saisir l'identifiant (4 nombre) : ";
+                cout << "Saisir le titre : ";
+                cin.ignore(); // Pour supprimer les entrées précedentes
+                getline(cin, titre);
+            }
+            while ( titre.empty() );
+            do
+            {
+                cout << "Saisir le producteur : ";
+                cin.ignore();
+                getline(cin, producteur);
+            }
+            while ( producteur.empty() );
+            do
+            {
+                cout << "Saisir le realisateur: ";
+                cin.ignore();
+                getline(cin, realisateur);
+            }
+            while ( realisateur.empty() );
+
+            do
+            {
+                cout << "Saisir l'identifiant (4 chiffres) : ";
                 cin >> id;
             }
-            while ( id < 1000 || id >= 10000 );
+            while (id < 1000 || id >= 10000);
 
-
-            const string path = CHEMIN_FILM;
-
-            /// Formatage du fichier
-            Film noticefilm(titre, id, producteur, realisateur);
-            entete = string("Titre") + ";" + "ID" + ";" + "Producteur" + ";" + "Realisateur";
-            noticefilm.Mediatheque::ajouter(path, entete);
-            data = titre + ";" + to_string(id) + ";" + producteur + ";" + realisateur;
-            noticefilm.Mediatheque::ajouter(path, data);
+            string notice = titre + ";" + to_string(id) + ";" + producteur + ";" + realisateur;
+            ajouter(notice); // Appelle la méthode de la classe mère
             break;
         }
+
         case SUPPRIMER:
         {
             int id;
-            string path;
-            string basepath;
-            path = "film.txt";
-            basepath = "film/";
-            Film affichefilm;
-            affichefilm.Mediatheque::afficher(path);
+            string titre;
+            Film film;
+            film.afficher(path);
             cout << "============ SUPPRESSION FILM ============" << endl;
+
             do
             {
-                cout << "Saisir l'identifiant de la notice a supprimer (4 chiffres) : " << endl;
-                cin >> id;
+                cout << "Saisir le titre rechercher : ";
+                cin.ignore(); // Pour supprimer les entrées précedentes
+                getline(cin, titre);
             }
-            while ( id < 1000 || id > 10000 );
-            Film noticesupp;
-            noticesupp.Mediatheque::supprimer(path, basepath, id);
-            break;
-        }
-        case RECHERCHER:
-        {
-            string titre;
-            int id;
-            string path;
-            path = CHEMIN_FILM;
-            Film recherchefilm;
-            cout << "============ RECHERCHE FILM ============" << endl;
-            cout << "Saisir le titre rechercher : ";
-            cin >> titre;
+            while ( titre.empty() );
+
             do
             {
                 cout << "Saisir l'ID rechercher : ";
                 cin >> id;
             }
-            while ( id < 1000 || id > 10000 );
-            recherchefilm.Mediatheque::rechercher(path, titre, id);
+            while ( id < 1000 || id >= 10000 );
+            string idstr = to_string(id); // Pour changer le type int en string
+            vector <string> element = {titre, idstr}; // Les éléments sont placés dans un vecteur
+            film.supprimer(element, path); /// Appelle de la m�thode supprimer de la class parent Mediatheque
             break;
         }
-        case AFFICHER:
+
+        case RECHERCHER:
         {
-            const string path = CHEMIN_FILM;
-            Film affichefilm;
-            affichefilm.Mediatheque::afficher(path);
+            int id;
+            Film film;
+            cout << "============ RECHERCHE FILM ============" << endl;
+            cout << "Saisir le titre rechercher : ";
+            do
+            {
+                cin.ignore(); // Pour supprimer les entrées précedentes
+                getline(cin, titre);
+            }
+            while ( titre.empty() );
+            do
+            {
+                cout << "Saisir l'ID rechercher : ";
+                cin >> id;
+            }
+            while (id < 1000 || id >= 10000);
+            string idstr = to_string(id);            // Pour changer le type int en string
+            vector<string> element = {titre, idstr}; // Les éléments sont placés dans un vecteur
+            film.rechercher(element, path);
             break;
         }
+
+        case AFFICHER:
+            afficher(path); // Appelle la méthode de la classe mère
+            break;
+
 
         case MODIFIER:
         {
-            const string path = CHEMIN_FILM;
-            string basepath = "./";
-            string to_update;
-            string upwd;
-            int choix_update;
-            Film updatefilm;
+            int id;
 
-            cout << "============ MODIFIER NOTICE  ============" << endl;
-            cout << endl;
-            cout << TITRE_FILM << " - Titre" << endl;
-            cout << PRODUCTEUR_FILM << " - Producteur" << endl;
-            cout << REALISATEUR_FILM << " - Realisateur" << endl;
-            cout << IDENTIFIANT_FILM << " - ID" << endl;
-            cout << RETOUR_MODIF_FILM << " - Retour menu gestion FILM  " << endl;
-            cout << "Saisir l'attribut a modifier : ";
-            cin >> choix_update;
-            cout << endl;
+            cout << "Saisir l'identifiant de la notice a modifier : ";
+            cin >> id;
 
-            if ( choix_update != RETOUR_MODIF_FILM )
-            {
-                cout << "Liste des films : " << endl;
-                updatefilm.Mediatheque::afficher(path);
-                cout << endl;
-            }
+            cout << "============ MODIFIER CHAMP ===========" << endl;
+            cout << TITRE << " - Modifier le titre" << endl;
+            cout << ARG_A << " - Modifier le producteur" << endl;
+            cout << ARG_B << " - Modifier le realisateur" << endl;
+            cout << "Votre choix : ";
+            int choix;
+            cin >> choix;
 
-
-            switch (choix_update)
-            {
-            case TITRE_FILM:
-            {
-                cout << endl;
-                cout << "Saisir le titre a modifier : " << endl;
-                cin >> to_update;
-                cout << endl;
-                cout << "Saisir le nouveau titre : " << endl;
-                cin >> upwd;
-
-                updatefilm.Mediatheque::modifier(path, basepath, to_update, upwd);
-                break;
-            }
-            case PRODUCTEUR_FILM:
-            {
-                cout << endl;
-                cout << "Saisir le producteur a modifier : " << endl;
-                cin >> to_update;
-                cout << endl;
-                cout << "Saisir le nouveau producteur : " << endl;
-                cin >> upwd;
-
-                updatefilm.Mediatheque::modifier(path, basepath, to_update, upwd);
-                break;
-            }
-            case REALISATEUR_FILM:
-            {
-                cout << endl;
-                cout << "Saisir le realisateur a modifier : " << endl;
-                cin >> to_update;
-                cout << endl;
-                cout << "Saisir le realisateur : " << endl;
-                cin >> upwd;
-
-                updatefilm.Mediatheque::modifier(path, basepath, to_update, upwd);
-                break;
-            }
-            case IDENTIFIANT_FILM:
-            {
-                int to_update_id;
-                int update_id;
-
-                cout << endl;
-                do
-                {
-                    cout << "Saisir l'ID a modifier : " << endl;
-                    cin >> to_update_id;
-                }
-                while ( to_update_id < 1000 || to_update_id > 10000 );
-
-                cout << endl;
-                do
-                {
-                    cout << "Saisir le nouvel ID : " << endl;
-                    cin >> update_id;
-                }
-                while ( update_id < 1000 || update_id > 10000 );
-
-                to_update = to_string(to_update_id);
-                upwd = to_string(update_id);
-                updatefilm.Mediatheque::modifier(path, basepath, to_update, upwd);
-                break;
-            }
-            case RETOUR_MODIF_FILM:
-            {
-                break;
-            }
-            default:
-                break;
-            }
-        }
-        case RETOUR:
-        {
+            modifier(id, choix); // Utilise la méthode de la classe mère
             break;
         }
+
+        case ENREGISTRER:
+            enregistrer(CHEMIN_FILM);
+            break;
+
+        case RETOUR:
+            cout << "Retour au menu principal." << endl;
+            data.clear();
+            break;
+
         default:
-            cerr << "Option invalide." << endl;
+            cerr << "Choix invalide !" << endl;
             break;
         }
     }

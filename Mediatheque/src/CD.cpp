@@ -1,205 +1,165 @@
 #include "CD.h"
 #include <iostream>
+#include <algorithm> // Pour std::remove_if
+#include <string>
 
-CD::CD() {};
-/// Surchage du constructeur
+const string path = CHEMINCD;
+
+// Constructeur par défaut
+CD::CD() {}
+
+// Surcharge du constructeur
 CD::CD(const string &titre, int ID, const string &interprete, const string &label)
     : Mediatheque(titre, ID), interprete(interprete), label(label) {}
+
+// Destructeur
 CD::~CD() {}
 
+// Menu spécifique à la gestion des CDs
 void CD::menucd()
 {
     int choixcd;
     do
     {
         cout << "============ MENU CD ============" << endl;
-        cout << AJOUTER << " - Ajout d'une notice " << endl;
-        cout << SUPPRIMER << " - Supprimer des notices " << endl;
-        cout << RECHERCHER << " - Rechercher des notices " << endl;
-        cout << AFFICHER << " - Afficher une notice " << endl;
+        cout << AJOUTER << " - Ajout d'une notice" << endl;
+        cout << SUPPRIMER << " - Supprimer une notice" << endl;
+        cout << RECHERCHER << " - Rechercher une notice" << endl;
+        cout << AFFICHER << " - Afficher toutes les notices" << endl;
         cout << MODIFIER << " - Modifier une notice" << endl;
-        cout << RETOUR << " - Retour menu principal" << endl;
-        cout << "Saisie : " << endl;
+        cout << ENREGISTRER << " - Sauvegarder les notices" << endl;
+        cout << RETOUR << " - Retour au menu principal" << endl;
+        cout << "Votre choix : ";
         cin >> choixcd;
 
         switch (choixcd)
         {
         case AJOUTER:
         {
-            string titre, interprete, label, data, input, entete;
+            string titre;
+            string interprete;
+            string label;
             int id;
 
-            cout << "============ AJOUT NOTICE ============" << endl;
-            cout << "Saisir le titre : ";
-            cin >> titre;
-            cout << "Saisir l'interprete : ";
-            cin >> interprete;
-            cout << "Saisir le label : ";
-            cin >> label;
             do
             {
-                cout << "Saisir l'identifiant (4 nombre) : ";
+                cout << "Saisir le titre : ";
+                cin.ignore(); // Pour supprimer les entrées précedentes
+                getline(cin, titre);
+            }
+            while ( titre.empty() );
+            do
+            {
+                cout << "Saisir l'interprete: ";
+                cin.ignore();
+                getline(cin, interprete);
+            }
+            while ( interprete.empty() );
+            do
+            {
+                cout << "Saisir le label: ";
+                cin.ignore();
+                getline(cin, label);
+            }
+            while ( label.empty() );
+
+            do
+            {
+                cout << "Saisir l'identifiant (4 chiffres) : ";
                 cin >> id;
             }
-            while ( id < 1000 || id >= 10000 );
+            while (id < 1000 || id >= 10000);
 
-            const string path = CHEMIN_CD;
+            cout << "N'oubliez pas de sauvegarder votre notice ;)" << endl;
 
-            CD noticecd(titre, id, interprete, label);
-            entete = string("Titre") + ";" + "ID" + ";" + "Interprete" + ";" + "Label";
-            noticecd.Mediatheque::ajouter(path, entete);
-            data = titre + ";" + to_string(id) + ";" + interprete + ";" + label;
-            noticecd.Mediatheque::ajouter(path, data);
+            string notice = titre + ";" + to_string(id) + ";" + interprete + ";" + label;
+            ajouter(notice);
             break;
         }
         case SUPPRIMER:
         {
-
-            const string path = CHEMIN_CD;
-            string basepath = "cd/";
+            int id;
+            string titre;
             CD affichecd;
-            affichecd.Mediatheque::afficher(path);
+            affichecd.afficher(path);
             cout << "============ SUPPRESSION CD ============" << endl;
+
             do
             {
-                cout << "Saisir l'identifiant de la notice à supprimer (4 nombre) : " << endl;
+                cout << "Saisir le titre rechercher : ";
+                cin.ignore(); // Pour supprimer les entrées précedentes
+                getline(cin, titre);
+            }
+            while ( titre.empty() );
+
+            do
+            {
+                cout << "Saisir l'ID rechercher ( 4 chiffres ): ";
                 cin >> id;
             }
-            while ( id < 1000 || id > 10000 );
-            CD noticesupp;
-            noticesupp.Mediatheque::supprimer(path, basepath, id);
+            while ( id < 1000 || id >= 10000 );
+            string idstr = to_string(id); // Pour changer le type int en string
+            vector <string> element = {titre, idstr}; // Les éléments sont placés dans un vecteur
+            affichecd.supprimer(element, path); /// Appelle de la m�thode supprimer de la class parent Mediatheque
             break;
         }
         case RECHERCHER:
         {
-            string titre;
             int id;
-            string path;
-            path = CHEMIN_CD;
-            CD recherchecd;
+            CD cd;
             cout << "============ RECHERCHE CD ============" << endl;
-            cout << "Saisir le titre rechercher :" << endl;
-            cin >> titre;
+            cout << "Saisir le titre rechercher : ";
             do
             {
-                cout << "Saisir l'ID rechercher : ";
+                cin.ignore(); // Pour supprimer les entrées précedentes
+                getline(cin, titre);
+            }
+            while ( titre.empty() );
+            do
+            {
+                cout << "Saisir l'ID rechercher ( 4 chiffres  ) : ";
                 cin >> id;
             }
-            while ( id < 1000 || id > 10000 );
-            recherchecd.Mediatheque::rechercher(path, titre, id);
+            while (id < 1000 || id >= 10000);
+            string idstr = to_string(id);            // Pour changer le type int en string
+            vector<string> element = {titre, idstr}; // Les éléments sont placés dans un vecteur
+            cd.rechercher(element, path);
             break;
         }
         case AFFICHER:
-        {
-            const string path = CHEMIN_CD;
-            CD affichecd;
-            affichecd.Mediatheque::afficher(path);
+            afficher(path);
             break;
-        }
+
         case MODIFIER:
         {
-            const string path = CHEMIN_CD;
-            string basepath = "./";
-            string to_update;
-            string upwd;
-            int choix_update;
-            CD updatecd;
+            int id;
 
-            cout << "============ MODIFIER NOTICE ============" << endl;
-            cout << endl;
-            cout << TITRE_CD << " - Titre" << endl;
-            cout << AUTEUR_CD << " - Auteur" << endl;
-            cout << LABEL_CD << " - Label" << endl;
-            cout << IDENTIFIANT_CD << " - ID" << endl;
-            cout << RETOUR_MODIF_CD << " - Retour menu gestion CD " << endl;
-            cout << "Saisir l'attribut a modifier : " << endl;
-            cin >> choix_update;
-            cout << endl;
+            cout << "Saisir l'identifiant de la notice a modifier : ";
+            cin >> id;
 
-            if ( choix_update != RETOUR_MODIF_CD )
-            {
-                cout << "Liste des CDs : " << endl;
-                updatecd.Mediatheque::afficher(path);
-                cout << endl;
-            }
+            cout << "============ MODIFIER CHAMP ===========" << endl;
+            cout << TITRE << " - Modifier le titre" << endl;
+            cout << ARG_A << " - Modifier l'interprète" << endl;
+            cout << ARG_B << " - Modifier le label" << endl;
+            cout << "Votre choix : ";
+            int choix;
+            cin >> choix;
 
-
-            switch (choix_update)
-            {
-            case TITRE_CD:
-            {
-                cout << "Saisir le titre a modifier : " << endl;
-                cin >> to_update;
-                cout << endl;
-                cout << "Saisir le nouveau titre : " << endl;
-                cin >> upwd;
-
-                updatecd.Mediatheque::modifier(path, basepath, to_update, upwd);
-                break;
-            }
-            case AUTEUR_CD:
-            {
-                cout << "Saisir l'auteur a modifier : " << endl;
-                cin >> to_update;
-                cout << endl;
-                cout << "Saisir le nouvel auteur : " << endl;
-                cin >> upwd;
-
-                updatecd.Mediatheque::modifier(path, basepath, to_update, upwd);
-                break;
-            }
-            case LABEL_CD:
-            {
-                cout << "Saisir le label a modifier : " << endl;
-                cin >> to_update;
-                cout << endl;
-                cout << "Saisir le label : " << endl;
-                cin >> upwd;
-
-                updatecd.Mediatheque::modifier(path, basepath, to_update, upwd);
-                break;
-            }
-            case IDENTIFIANT_CD:
-            {
-                int to_update_id;
-                int update_id;
-
-                cout << endl;
-                do
-                {
-                    cout << "Saisir l'ID a modifier : " << endl;
-                    cin >> to_update_id;
-                }
-                while ( to_update_id < 1000 || to_update_id > 10000 );
-                cout << endl;
-                do
-                {
-                    cout << "Saisir le nouvel ID : " << endl;
-                    cin >> update_id;
-                }
-                while ( update_id < 1000 || update_id > 10000 );
-
-                to_update = to_string(to_update_id);
-                upwd = to_string(update_id);
-
-                updatecd.Mediatheque::modifier(path, basepath, to_update, upwd);
-                break;
-            }
-            case RETOUR_MODIF_CD:
-            {
-                break;
-            }
-            default:
-                cerr << "Option invalide." << endl;
-                break;
-            }
-        }
-        case RETOUR:
-        {
+            modifier(id, choix);
             break;
         }
+
+        case ENREGISTRER:
+            enregistrer(CHEMINCD);
+            break;
+
+        case RETOUR:
+            cout << "Retour au menu principal." << endl;
+            data.clear();
+            break;
+
         default:
-            cerr << "Option invalide." << endl;
+            cerr << "Choix invalide !" << endl;
             break;
         }
     }

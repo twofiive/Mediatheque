@@ -1,61 +1,55 @@
-/// Ici on appelle les différentes classes crées
-#include "Mediatheque.h" /// La classe parent
-/// Les classes fille
-#include "CD.h"
-#include "Film.h"
-#include "Livre.h"
+#include "Mediatheque.h" // Classe parent
+#include "CD.h"          // Classe fille : CD
+#include "Film.h"        // Classe fille : Film
+#include "Livre.h"       // Classe fille : Livre
+#include <iostream>
+#include <string>
 
+using namespace std;
 
-
-int main()
-{
+int main() {
     int choix;
 
-    do
-    {
-        /// Implementation du menu principal
+    do {
+        /// Menu principal
         cout << "============ MENU MEDIATHEQUE ============" << endl;
-        cout << GESTION_CD << " - Gestion des notice CD " << endl;
-        cout << GESTION_LIVRE << " - Gestion des notice Livre" << endl;
-        cout << GESTION_FILM << " - Gestion des notice Film" << endl;
+        cout << GESTION_CD << " - Gestion des notices CD " << endl;
+        cout << GESTION_LIVRE << " - Gestion des notices Livre" << endl;
+        cout << GESTION_FILM << " - Gestion des notices Film" << endl;
         cout << QUITTER << " - Quitter " << endl;
         cout << "Saisie : ";
         cin >> choix;
 
-        switch (choix)
-        {
-        case GESTION_CD:
-        {
-            /// Création d'une classe et appel du menu
+        switch (choix) {
+        case GESTION_CD: {
+            /// Gestion des CDs
             CD cd;
-            cd.menucd();
+            cd.chargementdata(CHEMINCD); // Chargement des donnÃ©es
+            cd.menucd();                 // Menu de gestion des CDs
             break;
         }
-        case GESTION_LIVRE:
-        {
-            /// Création d'une classe et appel du menu
-            Livre livreA;
-            livreA.menulivre();
+        case GESTION_LIVRE: {
+            /// Gestion des livres
+            Livre livre;
+            livre.chargementdata(CHEMIN_LIVRE); // Chargement des donnÃ©es
+            livre.menulivre();                // Menu de gestion des livres
             break;
         }
-
-        case GESTION_FILM:
-        {
-            /// Création d'une classe et appel du menu
+        case GESTION_FILM: {
+            /// Gestion des films
             Film film;
-            film.menufilm();
+            film.chargementdata(CHEMIN_FILM); // Chargement des donnÃ©es
+            film.menufilm();                // Menu de gestion des films
             break;
         }
         case QUITTER:
-        {
+            cout << " A bientot !" << endl;
             exit(0);
-        }
         default:
-        {
-            cout << "Saisie incorrect ! " << endl;
+            cerr << "Saisie incorrecte !" << endl;
+            break;
         }
-        break;
-        }
-    }
-    while (choix == GESTION_CD || choix == GESTION_LIVRE || choix == GESTION_FILM || choix == QUITTER);
+    } while (choix != QUITTER);
+
+    return 0;
 }

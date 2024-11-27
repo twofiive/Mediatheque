@@ -1,214 +1,164 @@
 #include "Livre.h"
+#include <iostream>
+#include <sstream>
+#include <algorithm>
 
-Livre::Livre(){}
-/** Constructeur herite du constructeur de base de la classe mediatheque avec titre et ID et
-ajoute les attributs specifique a la classe interprete et label */
-Livre::Livre(const string &titre, int ID, const string &auteur, const string &editeur) : Mediatheque(titre, ID), auteur(auteur), editeur(editeur) {}
+const string path = CHEMIN_LIVRE;
 
+// Constructeurs
+Livre::Livre() {}
+Livre::Livre(const string &titre, int ID, const string &auteur, const string &editeur)
+    : Mediatheque(titre, ID), auteur(auteur), editeur(editeur) {}
+Livre::~Livre() {
+    data.clear();
+}
+
+// Menu spécifique à la gestion des livres
 void Livre::menulivre()
 {
-    /// Implementation du menu de la classe fille Livre
     int choixlivre;
     do
     {
         cout << "============ MENU LIVRE ============" << endl;
-        cout << AJOUTER << " - Ajout d'une notice " << endl;
-        cout << SUPPRIMER << " - Supprimer des notices " << endl;
-        cout << RECHERCHER << " - Rechercher des notices " << endl;
-        cout << AFFICHER << " - Afficher une notice " << endl;
+        cout << AJOUTER << " - Ajouter une notice" << endl;
+        cout << SUPPRIMER << " - Supprimer une notice" << endl;
+        cout << RECHERCHER << " - Rechercher une notice" << endl;
+        cout << AFFICHER << " - Afficher toutes les notices" << endl;
         cout << MODIFIER << " - Modifier une notice" << endl;
-        cout << RETOUR << " - Retour menu principal" << endl;
-        cout << "Saisie : ";
+        cout << ENREGISTRER << " - Sauvegarder les notices" << endl;
+        cout << RETOUR << " - Retour au menu principal" << endl;
+        cout << "Votre choix : ";
         cin >> choixlivre;
 
         switch (choixlivre)
         {
         case AJOUTER:
         {
-            /// D�claration des variables
-            string titre, auteur, editeur, data, input, entete;
+            string titre;
+            string auteur;
+            string editeur;
             int id;
 
-            cout << "============ AJOUT NOTICE ============" << endl;
-            cout << "Saisir le titre : ";
-            cin >> titre;
-            cout << "Saisir le auteur : ";
-            cin >> auteur;
-            cout << "Saisir le editeur : ";
-            cin >> editeur;
-            /// Blindage de la variable ID
             do
             {
-                cout << "Saisir l'identifiant (4 nombre) : ";
-                cin >> id;
+                cout << "Saisir le titre : ";
+                cin.ignore(); // Pour supprimer les entrées précedentes
+                getline(cin, titre);
             }
-            while ( id < 1000 || id >= 10000 );
+            while ( titre.empty() );
+            do
+            {
+                cout << "Saisir le auteur : ";
+                cin.ignore();
+                getline(cin, auteur);
+            }
+            while ( auteur.empty() );
+            do
+            {
+                cout << "Saisir l'editeur : ";
+                cin.ignore();
+                getline(cin, editeur);
+            }
+            while ( editeur.empty() );
+            do
+            {
+                cout << "Saisir l'identifiant (4 chiffres) : ";
+                cin >> id;
+            } while (id < 1000 || id >= 10000);
 
-            const string path = CHEMIN_LIVRE;
-
-            Livre noticelivre(titre, id, auteur, editeur);
-            entete = string("Titre") + ";" + "ID" + ";" + "Auteur" + ";" + "Editeur";
-            noticelivre.Mediatheque::ajouter(path, entete);
-            data = titre + ";" + to_string(id) + ";" + auteur + ";" + editeur;
-            noticelivre.Mediatheque::ajouter(path, data);
+            string notice = titre + ";" + to_string(id) + ";" + auteur + ";" + editeur;
+            ajouter(notice); // Appelle la méthode de la classe mère
             break;
         }
+
         case SUPPRIMER:
         {
             int id;
-            string path;
-            string basepath;
-            path = "livre.txt";
-            basepath = "livre/";
-            Livre affichelivre;
-            affichelivre.Mediatheque::afficher(path); /// Appelle de la m�thode afficher de la class parent Mediatheque
+            string titre;
+            Livre livre;
+            livre.afficher(path);
             cout << "============ SUPPRESSION LIVRE ============" << endl;
+
             do
             {
-                cout << "Saisir l'identifiant de la notice a supprimer (4 nombre) : " << endl;
-                cin >> id;
+                cout << "Saisir le titre rechercher : ";
+                cin.ignore(); // Pour supprimer les entrées précedentes
+                getline(cin, titre);
             }
-            while ( id < 1000 || id >= 10000 );
-            Livre noticesupp;
-            noticesupp.Mediatheque::supprimer(path, basepath, id); /// Appelle de la m�thode supprimer de la class parent Mediatheque
-            break;
-        }
-        case RECHERCHER:
-        {
-            string titre;
-            int id;
-            string path;
-            path = CHEMIN_LIVRE;
-            Livre recherchelivre;
-            cout << "============ RECHERCHE LIVRE ============" << endl;
-            cout << "Saisir le titre rechercher : ";
-            cin >> titre;
+            while ( titre.empty() );
+
             do
             {
                 cout << "Saisir l'ID rechercher : ";
                 cin >> id;
             }
             while ( id < 1000 || id >= 10000 );
-            recherchelivre.Mediatheque::rechercher(path, titre, id);
+            string idstr = to_string(id); // Pour changer le type int en string
+            vector <string> element = {titre, idstr}; // Les éléments sont placés dans un vecteur
+            livre.supprimer(element, path); /// Appelle de la m�thode supprimer de la class parent Mediatheque
             break;
         }
-        case AFFICHER:
+
+        case RECHERCHER:
         {
-            const string path = CHEMIN_LIVRE;
-            Livre affichelivre;
-            affichelivre.Mediatheque::afficher(path);
+            int id;
+
+            Livre livre;
+            cout << "============ RECHERCHE LIVRE ============" << endl;
+            cout << "Saisir le titre rechercher : ";
+            do
+                    {
+            cin.ignore(); // Pour supprimer les entrées précedentes
+            getline(cin, titre);
+            }
+            while ( titre.empty() );
+            do
+            {
+                cout << "Saisir l'ID rechercher : ";
+                cin >> id;
+            }
+            while (id < 1000 || id >= 10000);
+            string idstr = to_string(id);            // Pour changer le type int en string
+            vector<string> element = {titre, idstr}; // Les éléments sont placés dans un vecteur
+            livre.rechercher(element, path);
             break;
         }
+
+        case AFFICHER:
+            afficher(path); // Appelle la méthode de la classe mère
+            break;
+
         case MODIFIER:
         {
-            const string path = CHEMIN_LIVRE; // Chemin du fichier d�clar� en MACRO
-            string basepath = "./"; // Chemin du dossier dans lequel se trouve le fichier
-            string to_update;
-            string upwd; // Nouvelle valeur
-            int choix_update;
-            Livre updatelivre;
+            int id;
 
-            cout << "============ MODIFIER NOTICE  ============" << endl;
-            cout << endl;
-            cout << TITRE_LIVRE << " - Titre" << endl;
-            cout << AUTEUR_LIVRE << " - Auteur" << endl;
-            cout << EDITEUR_LIVRE << " - Editeur" << endl;
-            cout << IDENTIFIANT_LIVRE << " - ID" << endl;
-            cout << RETOUR_MODIF_LIVRE << " - Retour menu gestion Livre " << endl;
-            cout << "Saisir l'attribut a modifier : " << endl;
-            cin >> choix_update;
-            cout << endl;
+            cout << "Saisir l'identifiant de la notice a modifier : ";
+            cin >> id;
 
-            /// Blindage de l'affichage au cas o� l'utilisateur sorte du menu
-            if (choix_update != RETOUR_MODIF_LIVRE )
-            {
-                cout << "Liste des livres : " << endl;
-                updatelivre.Mediatheque::afficher(path);
-                cout << endl;
-            }
+            cout << "============ MODIFIER CHAMP ===========" << endl;
+            cout << TITRE << " - Modifier le titre" << endl;
+            cout << ARG_A << " - Modifier l'auteur" << endl;
+            cout << ARG_B << " - Modifier l'editeur" << endl;
+            cout << "Votre choix : ";
+            int choix;
+            cin >> choix;
 
-            switch (choix_update)
-            {
-            case TITRE_LIVRE:
-            {
-                cout << endl;
-                cout << "Saisir le titre a modifier : " << endl;
-                cin >> to_update;
-                cout << endl;
-                cout << "Saisir le nouveau titre : " << endl;
-                cin >> upwd;
-
-                updatelivre.Mediatheque::modifier(path, basepath, to_update, upwd); // Appel de la m�thode pour effectuer la modification des valeurs
-                break;
-            }
-            case AUTEUR_LIVRE:
-            {
-                cout << endl;
-                cout << "Saisir l'auteur a modifier : " << endl;
-                cin >> to_update;
-                cout << endl;
-                cout << "Saisir le nouvel auteur : " << endl;
-                cin >> upwd;
-
-                updatelivre.Mediatheque::modifier(path, basepath, to_update, upwd); // Appel de la m�thode pour effectuer la modification des valeurs
-                break;
-            }
-            case EDITEUR_LIVRE:
-            {
-                cout << endl;
-                cout << "Saisir l'editeur a modifier : " << endl;
-                cin >> to_update;
-                cout << endl;
-                cout << "Saisir le nouvel editeur : " << endl;
-                cin >> upwd;
-
-                updatelivre.Mediatheque::modifier(path, basepath, to_update, upwd); // Appel de la m�thode pour effectuer la modification des valeurs
-                break;
-            }
-            case IDENTIFIANT_LIVRE:
-            {
-                int to_update_id;
-                int update_id;
-
-                cout << endl;
-                do
-                {
-                    cout << "Saisir l'ID a modifier : " << endl;
-                    cin >> to_update_id;
-                }
-                while ( to_update_id < 1000 || to_update_id >= 10000 );
-
-                do
-                {
-                    cout << endl;
-                    cout << "Saisir le nouvel ID : " << endl;
-                    cin >> update_id;
-                }
-                while ( update_id < 1000 || update_id >= 10000 );
-
-                to_update = to_string(to_update_id);
-                upwd = to_string(update_id);
-
-                updatelivre.Mediatheque::modifier(path, basepath, to_update, upwd); // Appel de la methode pour effectuer la modification des valeurs
-                break;
-            }
-            case RETOUR_MODIF_LIVRE:
-            {
-                break;
-            }
-            default:
-                break;
-            }
+            modifier(id, choix); // Utilise la méthode de la classe mère
+            break;
         }
+
+
+        case ENREGISTRER:
+            enregistrer(CHEMIN_LIVRE);
+            break;
 
         case RETOUR:
-        {
+            cout << "Retour au menu principal." << endl;
             break;
-        }
+
         default:
-            cerr << "Option invalide." << endl;
+            cerr << "Choix invalide !" << endl;
             break;
         }
-    }
-    while (choixlivre != RETOUR);
+    } while (choixlivre != RETOUR);
 }
