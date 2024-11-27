@@ -116,17 +116,23 @@ void Mediatheque::supprimer(vector<string> &loadedData, const string &path)
             //argument afin de comparer et de rechercher le titre et l'id dans le fichier
             cout << "Resultat de la recherche : " << endl;                       //npos est un indicateur de non-correspondance
             cout << data[i] << endl;
-            data.  erase(data.begin() + i ); // Removes the element at index 1 (value 2)
+            data.erase(data.begin() + i ); // Removes the element at index 1 (value 2)
             cout << "Element supprime avec succes." << endl;
             index = i;
-            break;
-        }
             cout << "Voulez-vous sauvegarder avant de quitter ? (o/n) : ";
             cin >> choix;
             if (choix == 'o' || choix == 'O')
             {
                 Mediatheque::enregistrer(path);
             }
+
+/**            cout << "Contenu actuel de data apres suppression : " << endl;
+            for (const auto &ligne : data)
+            {
+                cout << ligne << endl;
+            }
+*/          break;
+        }
     }
 
 
@@ -141,10 +147,11 @@ void Mediatheque::ajouter(const string &notice)
 {
     data.emplace_back(notice);
     cout << "Notice ajoutee : " << notice << endl;
+    cout << "N'oubliez pas de sauvegarder ;)" << endl;
 }
 
 
-/**
+
 // Modifier un champ spécifique dans une notice
 void Mediatheque::modifier(int &id, int &choix)
 {
@@ -174,8 +181,8 @@ void Mediatheque::modifier(int &id, int &choix)
             {
             case TITRE:
             {
-                cout << "Titre actuel : " << champs[0] << endl;
-                cout << "Nouveau titre : ";
+                cout << " Valeur actuelle : " << champs[0] << endl;
+                cout << " Nouveau valeur : ";
                 string nouveauTitre;
                 cin.ignore();
                 getline(cin, nouveauTitre);
@@ -185,8 +192,8 @@ void Mediatheque::modifier(int &id, int &choix)
             }
             case ARG_A:
             {
-                cout << "Interprète actuel : " << champs[2] << endl;
-                cout << "Nouvel interprète : ";
+                cout << " Valeur actuelle : " << champs[2] << endl;
+                cout << " Nouvelle valeur : ";
                 string nouvelInterprete;
                 cin.ignore();
                 getline(cin, nouvelInterprete);
@@ -196,8 +203,8 @@ void Mediatheque::modifier(int &id, int &choix)
             }
             case ARG_B:
             {
-                cout << "Label actuel : " << champs[3] << endl;
-                cout << "Nouveau label : ";
+                cout << " Valeur actuelle : " << champs[3] << endl;
+                cout << " Nouvelle valeur : ";
                 string nouveauLabel;
                 cin.ignore();
                 getline(cin, nouveauLabel);
@@ -211,15 +218,16 @@ void Mediatheque::modifier(int &id, int &choix)
             }
 
             ligne = champs[0] + ";" + champs[1] + ";" + champs[2] + ";" + champs[3];
-            cout << "Notice modifiée avec succès : " << ligne << endl;
+            cout << "Notice modifiee avec succes : " << ligne << endl;
+
+            cout << "N'oubliez pas de sauvegarder ;)" << endl;
             break;
         }
     }
 
     if (!trouve)
     {
-        cout << "Aucune notice trouvée avec l'ID : " << id << endl;
+        cout << "Aucune notice trouvee avec l'ID : " << id << endl;
     }
 }
 
-*/

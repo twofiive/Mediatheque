@@ -40,12 +40,27 @@ void Film::menufilm()
             string realisateur;
             int id;
 
-            cout << "Saisir le titre : ";
-            cin >> titre;
-            cout << "Saisir le producteur : ";
-            cin >> producteur;
-            cout << "Saisir le realisateur : ";
-            cin >> realisateur;
+            do
+            {
+                cout << "Saisir le titre : ";
+                cin.ignore(); // Pour supprimer les entrées précedentes
+                getline(cin, titre);
+            }
+            while ( titre.empty() );
+            do
+            {
+                cout << "Saisir le producteur : ";
+                cin.ignore();
+                getline(cin, producteur);
+            }
+            while ( producteur.empty() );
+            do
+            {
+                cout << "Saisir le realisateur: ";
+                cin.ignore();
+                getline(cin, realisateur);
+            }
+            while ( realisateur.empty() );
 
             do
             {
@@ -115,18 +130,18 @@ void Film::menufilm()
             afficher(path); // Appelle la méthode de la classe mère
             break;
 
-/**
+
         case MODIFIER:
         {
             int id;
 
-            cout << "Saisir l'identifiant de la notice à modifier : ";
+            cout << "Saisir l'identifiant de la notice a modifier : ";
             cin >> id;
 
             cout << "============ MODIFIER CHAMP ===========" << endl;
-            cout << TITRE_FILM << " - Modifier le titre" << endl;
-            cout << PRODUCTEUR_FILM << " - Modifier le producteur" << endl;
-            cout << REALISATEUR_FILM << " - Modifier le réalisateur" << endl;
+            cout << TITRE << " - Modifier le titre" << endl;
+            cout << ARG_A << " - Modifier le producteur" << endl;
+            cout << ARG_B << " - Modifier le realisateur" << endl;
             cout << "Votre choix : ";
             int choix;
             cin >> choix;
@@ -134,7 +149,7 @@ void Film::menufilm()
             modifier(id, choix); // Utilise la méthode de la classe mère
             break;
         }
-*/
+
         case ENREGISTRER:
             enregistrer(CHEMIN_FILM);
             break;

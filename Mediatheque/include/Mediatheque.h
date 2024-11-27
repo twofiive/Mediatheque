@@ -31,14 +31,14 @@ public:
     // Constructeurs
     Mediatheque();
     Mediatheque(const string &titre, int ID);
-   ~Mediatheque();
+    ~Mediatheque();
 
     // Méthodes virtuelles
     virtual void afficher(const string &path);                               // Afficher les données
     virtual void rechercher(vector<string> &loadedData, const string &path); /** Rechercher une notice */
     virtual void supprimer(vector<string> &loadedData, const string &path);  /** Supprimer une notice */
     virtual void ajouter(const string &notice);            // Ajouter une notice
-    // virtual void modifier(int &choix, int &id);            // Modifier une notice
+    virtual void modifier(int &choix, int &id);            // Modifier une notice
     virtual void chargementdata(const string &chemin);     // Charger les données depuis un fichier
     virtual void enregistrer(const string &chemin);        // Enregistrer les données dans un fichier
 };

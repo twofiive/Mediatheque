@@ -39,13 +39,27 @@ void Livre::menulivre()
             string editeur;
             int id;
 
-            cout << "Saisir le titre : ";
-            cin >> titre;
-            cout << "Saisir l'auteur : ";
-            cin >> auteur;
-            cout << "Saisir l'editeur : ";
-            cin >> editeur;
-
+            do
+            {
+                cout << "Saisir le titre : ";
+                cin.ignore(); // Pour supprimer les entrées précedentes
+                getline(cin, titre);
+            }
+            while ( titre.empty() );
+            do
+            {
+                cout << "Saisir le auteur : ";
+                cin.ignore();
+                getline(cin, auteur);
+            }
+            while ( auteur.empty() );
+            do
+            {
+                cout << "Saisir l'editeur : ";
+                cin.ignore();
+                getline(cin, editeur);
+            }
+            while ( editeur.empty() );
             do
             {
                 cout << "Saisir l'identifiant (4 chiffres) : ";
@@ -114,19 +128,17 @@ void Livre::menulivre()
             afficher(path); // Appelle la méthode de la classe mère
             break;
 
-/**
         case MODIFIER:
         {
             int id;
 
-            cout << "Saisir l'identifiant de la notice à modifier : ";
+            cout << "Saisir l'identifiant de la notice a modifier : ";
             cin >> id;
 
             cout << "============ MODIFIER CHAMP ===========" << endl;
             cout << TITRE << " - Modifier le titre" << endl;
-            cout << IDENTIFIANT << " - Modifier l'id" << endl;
-            cout << AUTEUR << " - Modifier l'auteur" << endl;
-            cout << EDITEUR << " - Modifier l'éditeur" << endl;
+            cout << ARG_A << " - Modifier l'auteur" << endl;
+            cout << ARG_B << " - Modifier l'editeur" << endl;
             cout << "Votre choix : ";
             int choix;
             cin >> choix;
@@ -134,7 +146,7 @@ void Livre::menulivre()
             modifier(id, choix); // Utilise la méthode de la classe mère
             break;
         }
-*/
+
 
         case ENREGISTRER:
             enregistrer(CHEMIN_LIVRE);

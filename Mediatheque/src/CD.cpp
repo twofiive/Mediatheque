@@ -41,13 +41,27 @@ void CD::menucd()
             string label;
             int id;
 
-            cout << "Saisir le titre : ";
-            cin.ignore();
-            getline(cin, titre);
-            cout << "Saisir l'interprete : ";
-            getline(cin, interprete);
-            cout << "Saisir le label : ";
-            getline(cin, label);
+            do
+            {
+                cout << "Saisir le titre : ";
+                cin.ignore(); // Pour supprimer les entrées précedentes
+                getline(cin, titre);
+            }
+            while ( titre.empty() );
+            do
+            {
+                cout << "Saisir l'interprete: ";
+                cin.ignore();
+                getline(cin, interprete);
+            }
+            while ( interprete.empty() );
+            do
+            {
+                cout << "Saisir le label: ";
+                cin.ignore();
+                getline(cin, label);
+            }
+            while ( label.empty() );
 
             do
             {
@@ -55,6 +69,8 @@ void CD::menucd()
                 cin >> id;
             }
             while (id < 1000 || id >= 10000);
+
+            cout << "N'oubliez pas de sauvegarder votre notice ;)" << endl;
 
             string notice = titre + ";" + to_string(id) + ";" + interprete + ";" + label;
             ajouter(notice);
@@ -113,18 +129,18 @@ void CD::menucd()
         case AFFICHER:
             afficher(path);
             break;
-/**
+
         case MODIFIER:
         {
             int id;
 
-            cout << "Saisir l'identifiant de la notice à modifier : ";
+            cout << "Saisir l'identifiant de la notice a modifier : ";
             cin >> id;
 
             cout << "============ MODIFIER CHAMP ===========" << endl;
-            cout << TITRE_CD << " - Modifier le titre" << endl;
-            cout << AUTEUR_CD << " - Modifier l'interprète" << endl;
-            cout << LABEL_CD << " - Modifier le label" << endl;
+            cout << TITRE << " - Modifier le titre" << endl;
+            cout << ARG_A << " - Modifier l'interprète" << endl;
+            cout << ARG_B << " - Modifier le label" << endl;
             cout << "Votre choix : ";
             int choix;
             cin >> choix;
@@ -132,7 +148,7 @@ void CD::menucd()
             modifier(id, choix);
             break;
         }
-*/
+
         case ENREGISTRER:
             enregistrer(CHEMINCD);
             break;
